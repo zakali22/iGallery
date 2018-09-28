@@ -6,7 +6,7 @@ const passport = require("passport");
 const cookieSession = require("cookie-session");
 
 // Require the keys
-const keys = require("config/keys");
+const keys = require("./config/keys");
 
 // Header 'Allow-origin'
 app.use(function(req, res, next) {
@@ -53,7 +53,10 @@ app.use(passport.session());
 
 // Mongoose Collection creation
 
+require("./services/passport");
+
 // Routes
+require("./routes/auth")(app);
 
 // Conditional Production environment
 

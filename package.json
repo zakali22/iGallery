@@ -4,8 +4,9 @@
   "description": "A simple photo sharing web app",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "server": "nodemon server.js",
+    "client": "npm run start --prefix clientside",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Zak Ali",
   "license": "ISC",

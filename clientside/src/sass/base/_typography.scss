@@ -20,14 +20,23 @@ body {
 .header {
   &__logo {
     font-size: 6rem;
-    text-transform: uppercase;
     font-family: "Monoton", cursive;
   }
   &__nav {
+    &--item {
+      &:last-child {
+        a:link,
+        a:visited {
+          color: black;
+          font-weight: 100;
+        }
+      }
+    }
     &--text {
-      font-size: 2rem;
+      font-size: 1.8rem;
       font-weight: 300;
-      font-family: "Lato", sans-serif;
+      font-family: "Palanquin", sans-serif;
+      letter-spacing: 0.06em;
     }
   }
 }

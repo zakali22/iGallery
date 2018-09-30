@@ -19,10 +19,14 @@ const Header = props => {
       </div>
       <nav class="header__nav">
         <div class="header__nav--item">
-          <span class="header__nav--text">Discover</span>
+          <span class="header__nav--text">
+            <a href="#">discover</a>
+          </span>
         </div>
         <div class="header__nav--item">
-          <span class="header__nav--text">Register/Login</span>
+          <span class="header__nav--text">
+            <a href="#">register/login</a>
+          </span>
         </div>
       </nav>
     </header>

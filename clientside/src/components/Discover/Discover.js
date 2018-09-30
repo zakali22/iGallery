@@ -9,13 +9,26 @@ class Discover extends Component {
     console.log(this.props.unsplash);
   }
   render() {
-    const links = this.props.unsplash;
+    const columns = this.props.unsplash;
     return (
       <div className="container">
         <Header />
-        <div className="imageTiles">
-          {links.map(link => {
-            return <img src={link} />;
+        <div className="images__tile">
+          {columns.map(column => {
+            return (
+              <div className="images__tile__column">
+                {column.map(image => {
+                  return (
+                    <div className="images__tile__column--container">
+                      <img
+                        src={image}
+                        className="images__tile__column--image"
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            );
           })}
         </div>
       </div>

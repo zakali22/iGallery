@@ -1,0 +1,11 @@
+.images__tile {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  &__column {
+    margin: 0 1.6rem;
+    &--container {
+      margin: 1.6rem 0;
+    }
+  }
+}

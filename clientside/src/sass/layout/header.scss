@@ -45,32 +45,32 @@
         margin-right: 3rem;
         z-index: 1;
         position: relative;
+        &::after {
+          content: "";
+          width: 1rem;
+          height: 0.1rem;
+          position: absolute;
+          left: 0;
+          top: 1rem;
+          background-color: var(--orange);
+          transform: scale(0, 0);
+          z-index: -1;
+          padding: 2rem 0;
+          transform-origin: 50% 50%;
+          transition: transform 0.3s,
+            width 0.3s cubic-bezier(0.11, -0.08, 0.43, 1.84) 0.2s;
+        }
+        &:hover::after {
+          transform: scale(1, 0.1);
+          width: 100%;
+          color: white;
+        }
       }
       &:last-child {
         border: 3px solid var(--orange);
         padding: 1rem 1.5rem;
         padding-bottom: 1.3rem;
         margin-right: 1rem;
-      }
-      &::after {
-        content: "";
-        width: 1rem;
-        height: 0.1rem;
-        position: absolute;
-        left: 0;
-        top: 1rem;
-        background-color: var(--orange);
-        transform: scale(0, 0);
-        z-index: -1;
-        padding: 2rem 0;
-        transform-origin: 50% 50%;
-        transition: transform 0.3s,
-          width 0.3s cubic-bezier(0.11, -0.08, 0.43, 1.84) 0.2s;
-      }
-      &:hover::after {
-        transform: scale(1, 0.1);
-        width: 100%;
-        color: white;
       }
     }
   }

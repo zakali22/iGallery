@@ -9,10 +9,15 @@ class Discover extends Component {
     console.log(this.props.unsplash);
   }
   render() {
+    const links = this.props.unsplash;
     return (
       <div className="container">
         <Header />
-        <div className="imageTiles" />
+        <div className="imageTiles">
+          {links.map(link => {
+            return <img src={link} />;
+          })}
+        </div>
       </div>
     );
   }

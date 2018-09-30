@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ChevronIcon from "../../img/right-chevron.svg";
+import ArrowIcon from "../../img/right-arrow.svg";
 
 const Jumbotron = props => {
   return (
@@ -12,7 +12,7 @@ const Jumbotron = props => {
       <div className="container__button">
         <a href="#">
           <span class="container__button--text">Explore photos</span>
-          <img src={ChevronIcon} className="container__button--icon" />
+          <img src={ArrowIcon} className="container__button--icon" />
         </a>
       </div>
     </div>

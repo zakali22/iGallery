@@ -14,16 +14,24 @@ module.exports = app => {
   app.get("/api/unsplash/getPhotos", (req, res) => {
     axios({
       method: "GET",
-      url: `https://api.unsplash.com/photos?per_page=20&client_id=${
+      url: `https://api.unsplash.com/photos?per_page=24&client_id=${
         keys.unsplashKey
       }`
     }).then(response => {
       const photos = response.data;
       let photoArray = [];
       photos.forEach(photo => {
-        photoArray.push(photo.urls.regular);
+        photoArray.push(photo.urls.small);
       });
-      res.send(photoArray);
+      let organisedArr = [];
+      let imagePerCol = Math.round(photoArray.length / 3);
+      let column1 = photoArray.slice(0, imagePerCol);
+      let column2 = photoArray.slice(imagePerCol, imagePerCol * 2 - 1);
+      let column3 = photoArray.slice(imagePerCol * 2);
+      organisedArr.push(column1);
+      organisedArr.push(column2);
+      organisedArr.push(column3);
+      res.send(organisedArr);
     });
   });
 

@@ -1,0 +1,17 @@
+.container__button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--white);
+  padding: 1.3rem 2rem;
+  &--text {
+    color: var(--black);
+    font-weight: 400;
+  }
+  &--icon {
+    margin-left: 0.6rem;
+    height: 1.2rem;
+    width: 1.2rem;
+    animation: buttonIcon 2s infinite;
+  }
+}

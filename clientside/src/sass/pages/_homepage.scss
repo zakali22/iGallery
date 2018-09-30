@@ -1,7 +1,28 @@
 .container {
   background-image: url("../img/street.jpg");
-  background-position: top;
+  background-position: bottom;
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.jumbotron-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  &--text {
+    margin-top: -15rem;
+  }
+  .container__button {
+    margin-top: 3rem;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      box-shadow: 0 0.9rem 0.9rem var(--black);
+      transform: translateY(-1rem);
+    }
+  }
 }

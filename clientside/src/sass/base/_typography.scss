@@ -2,6 +2,7 @@
 
 :root {
   --white: #fff;
+  --black: #000000;
 }
 
 html {
@@ -13,7 +14,7 @@ body {
   font-family: "Lato", sans-serif;
   font-size: 1.6rem; // 16px
   font-weight: 300;
-  line-height: 1.7;
+  line-height: 2rem;
   color: #fff;
 }
 
@@ -37,6 +38,21 @@ body {
       font-weight: 300;
       font-family: "Palanquin", sans-serif;
       letter-spacing: 0.06em;
+    }
+  }
+}
+
+.jumbotron-container {
+  &--text {
+    text-align: center;
+    h1 {
+      font-size: 4rem;
+      font-family: "Work Sans", sans-serif;
+      letter-spacing: 0.2rem;
+    }
+    p {
+      font-size: 2rem;
+      font-weight: 300;
     }
   }
 }

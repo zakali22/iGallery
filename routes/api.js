@@ -14,9 +14,16 @@ module.exports = app => {
   app.get("/api/unsplash/getPhotos", (req, res) => {
     axios({
       method: "GET",
-      url: `https://api.unsplash.com/photos?client_id=${keys.unsplashKey}`
+      url: `https://api.unsplash.com/photos?per_page=20&client_id=${
+        keys.unsplashKey
+      }`
     }).then(response => {
-      res.send(response.data);
+      const photos = response.data;
+      let photoArray = [];
+      photos.forEach(photo => {
+        photoArray.push(photo.urls.regular);
+      });
+      res.send(photoArray);
     });
   });
 

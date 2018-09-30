@@ -2,14 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import SearchIcon from "../../img/search.svg";
 import LogoIcon from "../../img/Logo.svg";
+import { Link } from "react-router-dom";
 
 const Header = props => {
   return (
     <header className="header">
-      <a href="#">
+      <Link to={"/"}>
         <img src={LogoIcon} className="header__logoIcon" />
-      </a>
+      </Link>
       <div className="header__searchContainer">
+        {/* Don't forget to change to ReactForm */}
         <input
           type="text"
           name="searchString"
@@ -21,12 +23,17 @@ const Header = props => {
       <nav class="header__nav">
         <div class="header__nav--item">
           <span class="header__nav--text">
-            <a href="#">discover</a>
+            <Link to={"/discover"}>discover</Link>
           </span>
         </div>
         <div class="header__nav--item">
           <span class="header__nav--text">
-            <a href="#">register/login</a>
+            <Link to={"/register"}>register</Link>
+          </span>
+        </div>
+        <div class="header__nav--item">
+          <span class="header__nav--text">
+            <Link to={"/login"}>login</Link>
           </span>
         </div>
       </nav>

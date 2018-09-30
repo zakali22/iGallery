@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import SearchIcon from "../../img/search.svg";
+import LogoIcon from "../../img/Logo.svg";
 
 const Header = props => {
   return (
     <header className="header">
       <a href="#">
-        <h3 className="header__logo">ig</h3>
+        <img src={LogoIcon} className="header__logoIcon" />
       </a>
       <div className="header__searchContainer">
         <input

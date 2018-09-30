@@ -3,8 +3,11 @@
   justify-content: space-between;
   align-items: center;
   height: 10rem;
-  &__logo {
+  &__logoIcon {
+    margin-top: 2rem;
     margin-left: 3rem;
+    height: 7rem;
+    width: 7rem;
   }
   &__searchContainer {
     flex: 0 0 45%;
@@ -36,7 +39,6 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-right: 1rem;
     padding: 1rem;
     &--item {
       &:not(:last-child) {
@@ -45,9 +47,10 @@
         position: relative;
       }
       &:last-child {
-        background-color: var(--white);
-        padding: 1.5rem;
-        color: black;
+        border: 3px solid var(--orange);
+        padding: 1rem 1.5rem;
+        padding-bottom: 1.3rem;
+        margin-right: 1rem;
       }
       &::after {
         content: "";
@@ -55,8 +58,8 @@
         height: 0.1rem;
         position: absolute;
         left: 0;
-        bottom: -1.5rem;
-        background-color: var(--white);
+        top: 1rem;
+        background-color: var(--orange);
         transform: scale(0, 0);
         z-index: -1;
         padding: 2rem 0;

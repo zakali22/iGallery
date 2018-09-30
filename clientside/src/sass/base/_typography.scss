@@ -3,6 +3,7 @@
 :root {
   --white: #fff;
   --black: #000000;
+  --orange: #e35522;
 }
 
 html {
@@ -28,7 +29,7 @@ body {
       &:last-child {
         a:link,
         a:visited {
-          color: black;
+          color: var(--white);
           font-weight: 100;
         }
       }

@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Header from "../Navigation/Header";
+
 import { connect } from "react-redux";
-import * as actions from "../../actions/unsplashActions";
 
 class Discover extends Component {
   componentDidMount() {
-    this.props.getPhotos();
+    console.log(this.props.unsplash);
   }
   render() {
     return (
       <div className="container">
         <Header />
+        <div className="imageTiles" />
       </div>
     );
   }
@@ -25,5 +26,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  actions
+  null
 )(Discover);

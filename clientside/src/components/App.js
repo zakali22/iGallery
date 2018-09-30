@@ -5,7 +5,14 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Homepage from "./Homepage/Homepage";
 import Discover from "./Discover/Discover";
 
+// Setting initial State
+import { connect } from "react-redux";
+import * as actions from "../actions/unsplashActions";
+
 class App extends Component {
+  componentDidMount() {
+    this.props.getPhotos();
+  }
   render() {
     return (
       <Router>
@@ -19,4 +26,13 @@ class App extends Component {
     );
   }
 }
-export default App;
+
+const mapStateToProps = state => {
+  return {
+    unsplash: state.unsplash
+  };
+};
+export default connect(
+  mapStateToProps,
+  actions
+)(App);

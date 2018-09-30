@@ -1,4 +1,9 @@
 // Overall setting for both HTML and body
+
+:root {
+  --white: #fff;
+}
+
 html {
   // 1rem = 10px ~ 62.5%;
   font-size: 62.5%;
@@ -10,4 +15,19 @@ body {
   font-weight: 300;
   line-height: 1.7;
   color: #fff;
+}
+
+.header {
+  &__logo {
+    font-size: 6rem;
+    text-transform: uppercase;
+    font-family: "Monoton", cursive;
+  }
+  &__nav {
+    &--text {
+      font-size: 2rem;
+      font-weight: 300;
+      font-family: "Lato", sans-serif;
+    }
+  }
 }

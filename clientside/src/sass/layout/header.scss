@@ -1,0 +1,35 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10rem;
+  &__logo {
+    margin-left: 3rem;
+  }
+  &__searchContainer {
+    flex: 0 0 40%;
+    &--input {
+      width: 80%;
+      border: none;
+      padding: 1.3rem;
+      border-radius: 10rem;
+      transition: all 0.4s ease-in-out;
+      &:focus {
+        outline: none;
+        width: 90%;
+        z-index: -1;
+      }
+      &::-webkit-input-placeholder {
+        font-size: 1.4rem;
+      }
+    }
+    &--searchIcon {
+      height: 1.2rem;
+      width: 1.2rem;
+      transform: translateX(-3.5rem);
+      border: none;
+      cursor: pointer;
+      z-index: 1;
+    }
+  }
+}

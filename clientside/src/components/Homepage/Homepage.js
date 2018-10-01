@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Header from "../Navigation/Header";
+import HeaderHomepage from "../Navigation/HeaderHomepage";
 import Jumbotron from "./Jumbotron";
 
 class Homepage extends Component {
   render() {
     return (
       <div className="homepage">
-        <Header />
+        <HeaderHomepage />
         <Jumbotron />
       </div>
     );

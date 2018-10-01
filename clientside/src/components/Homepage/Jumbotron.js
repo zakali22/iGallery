@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ArrowIcon from "../../img/right-arrow.svg";
+import { Link } from "react-router-dom";
 
 const Jumbotron = props => {
   return (
@@ -10,10 +11,10 @@ const Jumbotron = props => {
         <p>Discover world-class beautiful and timeless photos</p>
       </div>
       <div className="container__button">
-        <a href="#">
+        <Link to={"/discover"}>
           <span class="container__button--text">Explore photos</span>
           <img src={ArrowIcon} className="container__button--icon" />
-        </a>
+        </Link>
       </div>
     </div>
   );

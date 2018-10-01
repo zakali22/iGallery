@@ -3,14 +3,13 @@
   justify-content: space-between;
   align-items: center;
   height: 10rem;
+  &__logoIcon {
+    margin-left: 3rem;
+    height: 5rem;
+    width: 5rem;
+  }
   &--overall {
     background-color: black;
-  }
-  &__logoIcon {
-    margin-top: 2rem;
-    margin-left: 3rem;
-    height: 7rem;
-    width: 7rem;
   }
   &__searchContainer {
     flex: 0 0 45%;

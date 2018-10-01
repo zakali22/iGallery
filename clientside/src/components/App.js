@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import * as actions from "../actions/unsplashActions";
 
 class App extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.getPhotos();
   }
   render() {

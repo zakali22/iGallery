@@ -16,7 +16,7 @@ const Header = props => {
           type="text"
           name="searchString"
           className="header__searchContainer--input"
-          placeholder="Search..."
+          placeholder="Search high-resolution images"
         />
         <img src={SearchIcon} className="header__searchContainer--searchIcon" />
       </div>

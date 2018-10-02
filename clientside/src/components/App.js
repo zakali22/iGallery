@@ -11,7 +11,7 @@ import * as actions from "../actions/unsplashActions";
 
 class App extends Component {
   componentWillMount() {
-    this.props.getPhotos();
+    this.props.getPhotos(1);
   }
   render() {
     return (

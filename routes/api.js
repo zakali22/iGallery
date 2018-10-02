@@ -11,12 +11,12 @@ const keys = require("../config/keys");
 
 module.exports = app => {
   // GET photos
-  app.get("/api/unsplash/getPhotos", (req, res) => {
+  app.get("/api/unsplash/getPhotos/:page", (req, res) => {
     axios({
       method: "GET",
-      url: `https://api.unsplash.com/photos?per_page=24&client_id=${
-        keys.unsplashKey
-      }`
+      url: `https://api.unsplash.com/photos?per_page=100&page=${
+        req.params.page
+      }&client_id=${keys.unsplashKey}`
     }).then(response => {
       const photos = response.data;
       let photoArray = [];
@@ -25,8 +25,9 @@ module.exports = app => {
       });
       let organisedArr = [];
       let imagePerCol = Math.round(photoArray.length / 3);
-      let column1 = photoArray.slice(0, imagePerCol);
-      let column2 = photoArray.slice(imagePerCol, imagePerCol * 2 - 1);
+      console.log(photoArray.length, imagePerCol);
+      let column1 = photoArray.slice(0, imagePerCol - 1);
+      let column2 = photoArray.slice(imagePerCol - 1, imagePerCol * 2);
       let column3 = photoArray.slice(imagePerCol * 2);
       organisedArr.push(column1);
       organisedArr.push(column2);

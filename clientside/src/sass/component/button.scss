@@ -4,6 +4,8 @@
   align-items: center;
   background-color: var(--white);
   padding: 1.3rem 2rem;
+  cursor: pointer;
+  border: 2px solid var(--black);
   &--text {
     color: var(--black);
     font-weight: 400;

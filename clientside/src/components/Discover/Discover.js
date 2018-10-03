@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Header from "../Navigation/Header";
 import Slide from "react-reveal/Slide";
 import ReactDOM from "react-dom";
+import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
 import * as actions from "../../actions/unsplashActions";
@@ -30,7 +31,7 @@ class Discover extends Component {
 
   render() {
     const columns = this.props.unsplash;
-    console.log(columns);
+
     return (
       <div className="container">
         <Header />
@@ -39,13 +40,19 @@ class Discover extends Component {
             return (
               <Slide bottom delay={i * 100}>
                 <div className="images__tile__column">
-                  {column.map(image => {
+                  {column.map((image, i) => {
                     return (
                       <div className="images__tile__column--container">
                         <img
-                          src={image}
+                          src={image.photo.url}
                           className="images__tile__column--image"
                         />
+                        <span className="images__tile__column--details">
+                          <img src={image.user.image} />
+                          <Link to={image.user.link}>
+                            <p>{image.user.name}</p>
+                          </Link>
+                        </span>
                       </div>
                     );
                   })}

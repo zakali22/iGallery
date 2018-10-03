@@ -57,3 +57,14 @@ body {
     }
   }
 }
+
+.images__tile {
+  &__column {
+    &--details {
+      p {
+        color: var(--white);
+        font-weight: 400;
+      }
+    }
+  }
+}

@@ -9,6 +9,11 @@ export default function(state = null, action) {
         ...state,
         image: action.payload
       };
+    case "SEARCH_PHOTO":
+      return {
+        ...state,
+        search: action.payload
+      };
     default:
       return state;
   }

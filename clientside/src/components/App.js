@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Homepage from "./Homepage/Homepage";
 import Discover from "./Discover/Discover";
 import PhotoDisplay from "./Photo/PhotoDisplay";
+import SearchResult from "./Search/SearchResult";
 
 // Setting initial State
 import { connect } from "react-redux";
@@ -19,6 +20,7 @@ class App extends Component {
             <Route exact path="/" component={Homepage} />
             <Route exact path="/discover" component={Discover} />
             <Route exact path="/photo/:id" component={PhotoDisplay} />
+            <Route exact path="/search/:search" component={SearchResult} />
           </Switch>
         </div>
       </Router>

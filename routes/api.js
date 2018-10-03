@@ -110,11 +110,41 @@ module.exports = app => {
   app.post("/api/unsplash/searchPhoto/", (req, res) => {
     axios({
       method: "GET",
-      url: `https://api.unsplash.com/search/photos?page=1&query=${
-        req.body.searchString
-      }?client_id=${keys.unsplashKey}`
+      url: `https://api.unsplash.com/search/photos/?page=1&query=${
+        req.body.search
+      }&client_id=${keys.unsplashKey}`
     }).then(response => {
-      res.send(response.data);
+      const photos = response.data.results;
+      let photoArray = [];
+      photos.forEach(photo => {
+        let photoObj = {};
+
+        let urlObject = {};
+        urlObject.url = photo.urls.small;
+        urlObject.id = photo.id;
+
+        let userObject = {};
+        userObject.name = photo.user.name;
+        userObject.link = photo.user.links.html;
+        userObject.image = photo.user.profile_image.small;
+        photoObj.user = userObject;
+        photoObj.photo = urlObject;
+        photoArray.push(photoObj);
+      });
+
+      let organisedArr = [];
+      let imagePerCol = Math.round(photoArray.length / 3);
+      console.log(photoArray.length, imagePerCol);
+      let column1 = photoArray.slice(0, imagePerCol);
+      let column2 = photoArray.slice(imagePerCol, imagePerCol * 2);
+      let column3 = photoArray.slice(imagePerCol * 2);
+      organisedArr.push(column1);
+      organisedArr.push(column2);
+      organisedArr.push(column3);
+
+      console.log(organisedArr);
+
+      res.send(organisedArr);
     });
   });
 
@@ -123,10 +153,10 @@ module.exports = app => {
     axios({
       method: "GET",
       url: `https://api.unsplash.com/search/users?page=1&query=${
-        req.body.searchString
-      }?client_id=${keys.unsplashKey}`
+        req.body.search
+      }&client_id=${keys.unsplashKey}`
     }).then(response => {
-      res.send(response.data);
+      res.send(response);
     });
   });
 

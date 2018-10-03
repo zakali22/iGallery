@@ -15,3 +15,14 @@ export const getPhoto = id => async dispatch => {
     payload: res.data
   });
 };
+
+export const searchPhoto = query => async dispatch => {
+  const res = await axios.post(`/api/unsplash/searchPhoto`, {
+    search: query
+  });
+
+  dispatch({
+    type: "SEARCH_PHOTO",
+    payload: res.data
+  });
+};

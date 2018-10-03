@@ -59,7 +59,18 @@ module.exports = app => {
         keys.unsplashKey
       }`
     }).then(response => {
-      res.send(response.data.urls.small);
+      const data = response.data;
+      let photoObj = {};
+      let userObject = {};
+      userObject.name = data.user.name;
+      userObject.link = data.user.links.html;
+      userObject.image = data.user.profile_image.small;
+      userObject.username = data.user.username;
+      userObject.likes = data.likes;
+      photoObj.user = userObject;
+      photoObj.photo = data.urls.small;
+      photoObj.downloadLink = data.links.download;
+      res.send(photoObj);
     });
   });
 

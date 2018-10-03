@@ -13,7 +13,7 @@ class Discover extends Component {
     counter: 2
   };
   componentDidMount() {
-    console.log(this.props.unsplash);
+    this.props.getPhotos(1);
   }
 
   componentDidUpdate() {
@@ -30,8 +30,8 @@ class Discover extends Component {
   };
 
   render() {
-    const columns = this.props.unsplash;
-
+    const columns = this.props.unsplash.data;
+    console.log(columns);
     return (
       <div className="container">
         <Header />
@@ -43,15 +43,17 @@ class Discover extends Component {
                   {column.map((image, i) => {
                     return (
                       <div className="images__tile__column--container">
-                        <img
-                          src={image.photo.url}
-                          className="images__tile__column--image"
-                        />
+                        <Link to={`/photo/${image.photo.id}`}>
+                          <img
+                            src={image.photo.url}
+                            className="images__tile__column--image"
+                          />
+                        </Link>
                         <span className="images__tile__column--details">
                           <img src={image.user.image} />
-                          <Link to={image.user.link}>
+                          <a href={image.user.link}>
                             <p>{image.user.name}</p>
-                          </Link>
+                          </a>
                         </span>
                       </div>
                     );

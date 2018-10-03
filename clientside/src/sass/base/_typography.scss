@@ -68,3 +68,24 @@ body {
     }
   }
 }
+
+.photo__container {
+  &--user {
+    color: var(--black);
+    p {
+      &:first-child {
+        font-size: 1.9rem;
+        font-weight: 400;
+      }
+    }
+  }
+  &--photoInfo {
+    color: var(--black);
+    &__button {
+      color: var(--black);
+    }
+    i {
+      color: pink;
+    }
+  }
+}

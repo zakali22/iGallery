@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Header from "../Navigation/Header";
 import { connect } from "react-redux";
 import * as actions from "../../actions/unsplashActions";
+import axios from "axios";
 
 class PhotoDisplay extends Component {
   state = {
@@ -11,6 +12,15 @@ class PhotoDisplay extends Component {
   componentDidMount() {
     this.props.getPhoto(this.props.match.params.id);
   }
+
+  downloadPhoto = async link => {
+    const id = this.props.match.params.id;
+    const res = await axios.post(`/api/unsplash/getPhoto/${id}`, {
+      link: link
+    });
+    console.log(res.data);
+  };
+
   renderPhotoDetails() {
     const image = this.props.unsplash.image;
     if (image) {
@@ -29,7 +39,10 @@ class PhotoDisplay extends Component {
             <span className="photo__container--photoInfo">
               <i class="fas fa-heart" />
               <p>{image.user.likes}</p>
-              <button className="photo__container--photoInfo__button">
+              <button
+                onClick={this.downloadPhoto.bind(this, image.downloadLink)}
+                className="photo__container--photoInfo__button"
+              >
                 Download
               </button>
             </span>

@@ -7,6 +7,10 @@ const unsplash = require("../services/unsplash");
 const axios = require("axios");
 const queryString = require("query-string");
 
+// Required to download file
+const Fs = require("fs");
+const Path = require("path");
+
 const keys = require("../config/keys");
 
 module.exports = app => {
@@ -72,6 +76,34 @@ module.exports = app => {
       photoObj.downloadLink = data.links.download;
       res.send(photoObj);
     });
+  });
+
+  // DOWNLOAD a photo
+  app.post("/api/unsplash/getPhoto/:id/", (req, res) => {
+    const download = async () => {
+      const homedir = require("os").homedir();
+      const url = req.body.link;
+      const path = Path.join(homedir, "Downloads", `${req.params.id}.jpg`);
+      console.log(homedir);
+      const response = await axios({
+        method: "GET",
+        url: url,
+        responseType: "stream"
+      });
+      response.data.pipe(Fs.createWriteStream(path));
+
+      return new Promise((resolve, reject) => {
+        response.data.on("end", () => {
+          resolve();
+        });
+
+        response.data.on("error", () => {
+          reject(err);
+        });
+      });
+    };
+    download();
+    res.send("done");
   });
 
   // SEARCH a photo

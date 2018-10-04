@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
-import unsplashReducer from "./unsplashReducer.js";
+import unsplashReducer from "./unsplashReducer";
+import authReducer from "./authReducer";
 
 export default combineReducers({
-  unsplash: unsplashReducer
+  unsplash: unsplashReducer,
+  auth: authReducer
 });

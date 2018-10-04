@@ -4,10 +4,17 @@ import SearchIcon from "../../img/search.svg";
 import LogoIcon from "../../img/Logo.svg";
 import { Link } from "react-router-dom";
 
+import { connect } from "react-redux";
+import * as actions from "../../actions/authActions";
+
 class Header extends Component {
   state = {
     search: ""
   };
+
+  componentDidMount() {
+    this.props.fetchUser();
+  }
 
   handleChange = e => {
     this.setState({
@@ -60,4 +67,13 @@ class Header extends Component {
   }
 }
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  actions
+)(Header);

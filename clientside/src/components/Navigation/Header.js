@@ -16,6 +16,41 @@ class Header extends Component {
     this.props.fetchUser();
   }
 
+  handleUserCheck = () => {
+    switch (this.props.auth) {
+      case null:
+        return;
+      case false:
+        return (
+          <React.Fragment>
+            <div class="header__nav--item">
+              <span class="header__nav--text">
+                <Link to={"/register"}>register</Link>
+              </span>
+            </div>
+            <div class="header__nav--item">
+              <span class="header__nav--text">
+                <Link to={"/profile"}>login</Link>
+              </span>
+            </div>
+          </React.Fragment>
+        );
+        break;
+      default:
+        return (
+          <React.Fragment>
+            <div class="header__nav--user">
+              <span>
+                <Link to={"/register"}>
+                  <img src={this.props.auth.user.image} />
+                </Link>
+              </span>
+            </div>
+          </React.Fragment>
+        );
+    }
+  };
+
   handleChange = e => {
     this.setState({
       search: e.target.value
@@ -51,16 +86,7 @@ class Header extends Component {
               <Link to={"/discover"}>discover</Link>
             </span>
           </div>
-          <div class="header__nav--item">
-            <span class="header__nav--text">
-              <Link to={"/register"}>register</Link>
-            </span>
-          </div>
-          <div class="header__nav--item">
-            <span class="header__nav--text">
-              <Link to={"/login"}>login</Link>
-            </span>
-          </div>
+          {this.handleUserCheck()}
         </nav>
       </header>
     );

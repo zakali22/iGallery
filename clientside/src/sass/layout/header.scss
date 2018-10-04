@@ -42,6 +42,12 @@
     justify-content: space-around;
     align-items: center;
     padding: 1rem;
+    &--user {
+      margin-right: 2rem;
+      img {
+        border-radius: 100%;
+      }
+    }
     &--item {
       &:not(:last-child) {
         margin-right: 3rem;

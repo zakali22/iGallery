@@ -7,7 +7,7 @@ import Discover from "./Discover/Discover";
 import PhotoDisplay from "./Photo/PhotoDisplay";
 import SearchResult from "./Search/SearchResult";
 import Register from "./Registration/Registration";
-
+import Login from "./Registration/Login";
 // Setting initial State
 import { connect } from "react-redux";
 import * as actions from "../actions/unsplashActions";
@@ -23,6 +23,7 @@ class App extends Component {
             <Route exact path="/photo/:id" component={PhotoDisplay} />
             <Route exact path="/search/:search" component={SearchResult} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
           </Switch>
         </div>
       </Router>

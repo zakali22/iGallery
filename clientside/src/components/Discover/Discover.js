@@ -34,7 +34,7 @@ class Discover extends Component {
     console.log(columns);
     return (
       <div className="container">
-        <Header />
+        <Header className="header header--overall" />
         <div className="images__tile">
           {columns.map((column, i) => {
             return (

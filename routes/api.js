@@ -107,12 +107,12 @@ module.exports = app => {
   });
 
   // SEARCH a photo
-  app.post("/api/unsplash/searchPhoto/", (req, res) => {
+  app.post("/api/unsplash/searchPhoto/:page", (req, res) => {
     axios({
       method: "GET",
-      url: `https://api.unsplash.com/search/photos/?page=1&query=${
-        req.body.search
-      }&client_id=${keys.unsplashKey}`
+      url: `https://api.unsplash.com/search/photos/?per_page=180&page=${
+        req.params.page
+      }&query=${req.body.search}&client_id=${keys.unsplashKey}`
     }).then(response => {
       const photos = response.data.results;
       let photoArray = [];

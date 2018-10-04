@@ -1,23 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import HeaderHomepage from "../Navigation/HeaderHomepage";
+import Header from "../Navigation/Header";
 import Jumbotron from "./Jumbotron";
 
-class Homepage extends Component {
-  render() {
-    return (
-      <div className="homepage">
-        <HeaderHomepage />
-        <Jumbotron />
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = state => {
-  return {
-    unsplash: state.unsplash
-  };
+const Homepage = props => {
+  return (
+    <div className="homepage">
+      <Header className="header" />
+      <Jumbotron />
+    </div>
+  );
 };
 
 export default Homepage;

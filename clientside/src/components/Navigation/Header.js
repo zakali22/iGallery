@@ -27,7 +27,7 @@ class Header extends Component {
             name="searchString"
             className="header__searchContainer--input"
             placeholder="Search high-resolution images"
-            autoComplete="fo"
+            autoComplete="off"
             onChange={this.handleChange}
             value={this.state.search}
           />
@@ -35,7 +35,6 @@ class Header extends Component {
             <img
               src={SearchIcon}
               className="header__searchContainer--searchIcon"
-              onClick={this.submitSearch}
             />
           </Link>
         </div>

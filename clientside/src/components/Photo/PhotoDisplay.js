@@ -55,7 +55,7 @@ class PhotoDisplay extends Component {
   render() {
     return (
       <div className="container">
-        <Header />
+        <Header className="header header--overall" />
         {this.renderPhotoDetails()}
       </div>
     );

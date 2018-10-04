@@ -16,8 +16,8 @@ export const getPhoto = id => async dispatch => {
   });
 };
 
-export const searchPhoto = query => async dispatch => {
-  const res = await axios.post(`/api/unsplash/searchPhoto`, {
+export const searchPhoto = (query, page) => async dispatch => {
+  const res = await axios.post(`/api/unsplash/searchPhoto/${page}`, {
     search: query
   });
 

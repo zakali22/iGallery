@@ -9,9 +9,26 @@ import { connect } from "react-redux";
 import * as actions from "../../actions/unsplashActions";
 
 class SearchResult extends Component {
+  state = {
+    counter: 2
+  };
   componentDidMount() {
-    this.props.searchPhoto(this.props.match.params.search);
+    console.log(this.props.match.params.search);
+    this.props.searchPhoto(this.props.match.params.search, 1);
   }
+
+  componentDidUpdate() {
+    ReactDOM.findDOMNode(this).scrollIntoView();
+  }
+
+  loadmore = () => {
+    let countInc = this.state.counter;
+    this.props.searchPhoto(this.props.match.params.search, countInc);
+    countInc++;
+    this.setState({
+      counter: countInc
+    });
+  };
 
   renderResults() {
     const columns = this.props.unsplash.search;
@@ -54,6 +71,11 @@ class SearchResult extends Component {
       <div className="container">
         <Header className="header header--overall" />
         {this.renderResults()}
+        <div className="loadmore">
+          <div className="container__button" onClick={this.loadmore}>
+            <span className="container__button--text">Load more</span>
+          </div>
+        </div>
       </div>
     );
   }

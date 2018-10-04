@@ -24,15 +24,28 @@ passport.use(
     {
       clientID: keys.facebookKey,
       clientSecret: keys.facebookSecret,
-      callbackURL: "http://localhost:5000/auth/facebook/callback"
+      callbackURL: "http://localhost:3000/auth/facebook/callback",
+      profileFields: [
+        "id",
+        "displayName",
+        "email",
+        "first_name",
+        "last_name",
+        "middle_name",
+        "link",
+        "photos"
+      ]
     },
     (accessToken, refreshToken, profile, done) => {
+      console.log(profile);
       User.findOne({ facebookId: profile.id }).then(user => {
         if (user) {
           done(null, user);
         } else {
           new User({
-            facebookId: profile.id
+            facebookId: profile.id,
+            name: profile.displayName,
+            image: profile._json.picture.data.url
           })
             .save()
             .then(user => {
@@ -58,7 +71,9 @@ passport.use(
           done(null, user);
         } else {
           new User({
-            googleId: profile.id
+            googleId: profile.id,
+            name: profile.displayName,
+            image: profile._json.image.url
           })
             .save()
             .then(user => {

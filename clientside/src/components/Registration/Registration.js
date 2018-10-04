@@ -84,16 +84,16 @@ class Register extends Component {
           </Form>
           <h5>or</h5>
           <div className="third-party">
-            <Link to={"/auth/google"} className="button-link">
+            <a href="/auth/google" className="button-link">
               <button className="button-link--google">
                 <img src={GoogleIcon} /> <p>Sign up with Google</p>
               </button>
-            </Link>
-            <Link to={"/auth/facebook"} className="button-link">
+            </a>
+            <a href="/auth/facebook" className="button-link">
               <button className="button-link--facebook">
                 <img src={FacebookIcon} /> <p>Sign up with Facebook</p>
               </button>
-            </Link>
+            </a>
           </div>
         </div>
       </div>

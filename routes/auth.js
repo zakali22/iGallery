@@ -22,7 +22,7 @@ module.exports = app => {
     "/auth/google/callback",
     passport.authenticate("google"),
     (req, res) => {
-      res.send("Redirecting...");
+      res.redirect("http://localhost:3000/");
     }
   );
 
@@ -33,7 +33,7 @@ module.exports = app => {
     "/auth/facebook/callback",
     passport.authenticate("facebook"),
     (req, res) => {
-      res.send("Redirecting...");
+      res.redirect("http://localhost:3000/");
     }
   );
 
@@ -59,9 +59,14 @@ module.exports = app => {
       });
   });
 
+  app.get("/api/current_user", (req, res) => {
+    console.log(req.user);
+    res.send(req.user);
+  });
+
   app.get("/api/logout", (req, res) => {
     req.logout();
     console.log(req.user);
-    res.send(req.user);
+    res.redirect("http://localhost:3000/");
   });
 };

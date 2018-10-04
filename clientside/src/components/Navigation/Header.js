@@ -9,7 +9,24 @@ import * as actions from "../../actions/authActions";
 
 class Header extends Component {
   state = {
-    search: ""
+    search: "",
+    showMenu: false
+  };
+
+  showMenu = event => {
+    event.preventDefault();
+
+    this.setState({ showMenu: true }, () => {
+      document.addEventListener("click", this.closeMenu);
+    });
+  };
+
+  closeMenu = event => {
+    if (!this.dropdownMenu.contains(event.target)) {
+      this.setState({ showMenu: false }, () => {
+        document.removeEventListener("click", this.closeMenu);
+      });
+    }
   };
 
   componentDidMount() {
@@ -17,10 +34,10 @@ class Header extends Component {
   }
 
   handleUserCheck = () => {
-    switch (this.props.auth) {
+    switch (this.props.auth.user) {
       case null:
         return;
-      case false:
+      case false || "":
         return (
           <React.Fragment>
             <div class="header__nav--item">
@@ -30,7 +47,7 @@ class Header extends Component {
             </div>
             <div class="header__nav--item">
               <span class="header__nav--text">
-                <Link to={"/profile"}>login</Link>
+                <Link to={"/login"}>login</Link>
               </span>
             </div>
           </React.Fragment>
@@ -38,15 +55,35 @@ class Header extends Component {
         break;
       default:
         return (
-          <React.Fragment>
-            <div class="header__nav--user">
-              <span>
-                <Link to={"/register"}>
-                  <img src={this.props.auth.user.image} />
-                </Link>
+          <div className="logged_in_user--container">
+            <div class="header__nav--user" onClick={this.showMenu}>
+              <span class="header__nav--text">
+                <img src={this.props.auth.user.image} />
               </span>
             </div>
-          </React.Fragment>
+            {this.state.showMenu ? (
+              <div
+                className="header__nav--dropdownMenu"
+                ref={element => {
+                  this.dropdownMenu = element;
+                }}
+              >
+                <i class="fas fa-caret-up" />
+                <Link to={"/profile"}>
+                  <button>
+                    {" "}
+                    <p>Profile</p>
+                  </button>
+                </Link>
+                <a href="/api/logout">
+                  <button>
+                    {" "}
+                    <p>Logout</p>
+                  </button>
+                </a>
+              </div>
+            ) : null}
+          </div>
         );
     }
   };

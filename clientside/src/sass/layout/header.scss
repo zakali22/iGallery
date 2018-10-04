@@ -37,15 +37,46 @@
       z-index: 1;
     }
   }
+
+  .logged_in_user--container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
   &__nav {
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding: 1rem;
+    padding-right: 3rem;
+    position: relative;
     &--user {
-      margin-right: 2rem;
+      cursor: pointer;
       img {
         border-radius: 100%;
+      }
+    }
+    &--dropdownMenu {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      right: 2rem;
+      width: 15rem;
+      button {
+        border: none;
+        background: var(--white);
+        padding: 0.3rem 2rem;
+        width: 100%;
+        display: flex;
+        cursor: pointer;
+      }
+      i {
+        font-size: 3.5rem;
+        position: absolute;
+        top: -2rem;
+        right: 2.6rem;
       }
     }
     &--item {

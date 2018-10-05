@@ -46,7 +46,9 @@ passport.use(
             facebookId: profile.id,
             name: profile.displayName,
             image: profile._json.picture.data.url,
-            email: profile._json.email
+            email: profile._json.email,
+            first_name: profile._json.name.givenName,
+            last_name: profile._json.name.familyName
           })
             .save()
             .then(user => {
@@ -67,6 +69,7 @@ passport.use(
       callbackURL: "/auth/google/callback"
     },
     (accessToken, refreshToken, profile, done) => {
+      console.log(profile);
       User.findOne({ googleId: profile.id }).then(user => {
         if (user) {
           done(null, user);
@@ -75,7 +78,9 @@ passport.use(
             googleId: profile.id,
             name: profile.displayName,
             image: profile._json.image.url,
-            email: profile._json.emails[0].value
+            email: profile._json.emails[0].value,
+            first_name: profile._json.name.givenName,
+            last_name: profile._json.name.familyName
           })
             .save()
             .then(user => {

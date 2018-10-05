@@ -5,9 +5,12 @@ const Unsplash = require("unsplash-js").default;
 const toJson = Unsplash.toJson;
 const queryString = require("query-string");
 const axios = require("axios");
+const mongoose = require("mongoose");
 
 // Require the new unsplash instance
 const unsplash = require("../services/unsplash");
+
+const User = mongoose.model("Users");
 
 module.exports = app => {
   // GOOGLE
@@ -67,6 +70,24 @@ module.exports = app => {
   app.get("/api/current_user", (req, res) => {
     console.log(req.user);
     res.send(req.user);
+  });
+
+  app.post("/api/edit/:id", (req, res) => {
+    console.log(req.body);
+    User.updateOne(
+      { _id: req.user._id },
+      {
+        $set: {
+          first_name: req.body.first_name,
+          last_name: req.body.last_name,
+          email: req.body.email,
+          name: req.body.name
+        }
+      }
+    ).then(response => {
+      console.log(response);
+    });
+    res.send("done");
   });
 
   app.get("/api/logout", (req, res) => {

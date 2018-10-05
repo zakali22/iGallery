@@ -6,12 +6,15 @@ const toJson = Unsplash.toJson;
 const unsplash = require("../services/unsplash");
 const axios = require("axios");
 const queryString = require("query-string");
+const mongoose = require("mongoose");
 
 // Required to download file
 const Fs = require("fs");
 const Path = require("path");
 
 const keys = require("../config/keys");
+
+const User = mongoose.model("Users");
 
 module.exports = app => {
   // GET photos
@@ -56,7 +59,6 @@ module.exports = app => {
 
   // GET a specific image
   app.get("/api/unsplash/getPhoto/:id", (req, res) => {
-    console.log(req.params.id);
     axios({
       method: "GET",
       url: `https://api.unsplash.com/photos/${req.params.id}?client_id=${
@@ -80,6 +82,32 @@ module.exports = app => {
 
   // DOWNLOAD a photo
   app.post("/api/unsplash/getPhoto/:id/", (req, res) => {
+    if (req.user.downloadedImages.length === 0) {
+      User.updateOne(
+        { _id: req.user.id },
+        { $push: { downloadedImages: req.body.link } }
+      ).then(response => {
+        console.log(response);
+      });
+    } else {
+      console.log(req.user.downloadedImages);
+      let linkExists = false;
+      req.user.downloadedImages.forEach(link => {
+        if (link === req.body.link) {
+          linkExists = true;
+        }
+      });
+
+      if (!linkExists) {
+        User.updateOne(
+          { _id: req.user.id },
+          { $push: { downloadedImages: req.body.link } }
+        ).then(response => {
+          console.log(response);
+        });
+      }
+    }
+
     const download = async () => {
       const homedir = require("os").homedir();
       const url = req.body.link;

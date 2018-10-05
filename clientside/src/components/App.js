@@ -9,6 +9,7 @@ import SearchResult from "./Search/SearchResult";
 import Register from "./Registration/Registration";
 import Login from "./Registration/Login";
 import Profile from "./Profile/Profile";
+import EditProfile from "./Profile/Edit";
 // Setting initial State
 import { connect } from "react-redux";
 import * as actions from "../actions/unsplashActions";
@@ -26,6 +27,7 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/edit/:id" component={Profile} />
           </Switch>
         </div>
       </Router>

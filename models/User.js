@@ -9,7 +9,8 @@ const userSchema = new Schema({
   downloadedImages: {
     type: Array,
     default: []
-  }
+  },
+  email: String
 });
 
 mongoose.model("Users", userSchema);

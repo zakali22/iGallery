@@ -45,7 +45,8 @@ passport.use(
           new User({
             facebookId: profile.id,
             name: profile.displayName,
-            image: profile._json.picture.data.url
+            image: profile._json.picture.data.url,
+            email: profile._json.email
           })
             .save()
             .then(user => {
@@ -73,7 +74,8 @@ passport.use(
           new User({
             googleId: profile.id,
             name: profile.displayName,
-            image: profile._json.image.url
+            image: profile._json.image.url,
+            email: profile._json.emails[0].value
           })
             .save()
             .then(user => {

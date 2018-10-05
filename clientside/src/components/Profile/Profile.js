@@ -7,6 +7,7 @@ class Profile extends Component {
     return (
       <div className="container">
         <Header className="header header--overall" />
+        <div className="profile__container" />
       </div>
     );
   }

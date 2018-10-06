@@ -18,7 +18,9 @@ class PhotoDisplay extends Component {
     const res = await axios.post(`/api/unsplash/getPhoto/${id}`, {
       link: link
     });
-    console.log(res.data);
+    if (res.data.error) {
+      this.props.history.push("/login");
+    }
   };
 
   renderPhotoDetails() {

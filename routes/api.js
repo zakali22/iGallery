@@ -16,6 +16,8 @@ const keys = require("../config/keys");
 
 const User = mongoose.model("Users");
 
+const requireLogin = require("../middleware/requireLogin");
+
 module.exports = app => {
   // GET photos
   app.get("/api/unsplash/getPhotos/:page", (req, res) => {
@@ -81,7 +83,7 @@ module.exports = app => {
   });
 
   // DOWNLOAD a photo
-  app.post("/api/unsplash/getPhoto/:id/", (req, res) => {
+  app.post("/api/unsplash/getPhoto/:id/", requireLogin, (req, res) => {
     axios({
       method: "GET",
       url: `https://api.unsplash.com/photos/${req.params.id}?client_id=${

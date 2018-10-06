@@ -1,10 +1,13 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
-
+const expressValidator = require("express-validator");
+const session = require("express-session");
+const path = require("path");
 // Require the keys
 const keys = require("./config/keys");
 
@@ -38,6 +41,8 @@ mongoose.connect(keys.mongoURI);
 // Body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "public")));
 
 // Cookie session
 app.use(
@@ -50,6 +55,35 @@ app.use(
 // Passport
 app.use(passport.initialize());
 app.use(passport.session());
+
+//---------------------- Local Passport------------------------------//
+// Express Messages
+app.use(require("connect-flash")());
+app.use((req, res, next) => {
+  res.locals.messages = require("express-messages")(req, res);
+  res.locals.user = req.user || null;
+  next();
+});
+
+app.use(
+  expressValidator({
+    errorFormatter: function(param, msg, value) {
+      const namespace = param.split("."),
+        root = namespace.shift(),
+        formParam = root;
+
+      while (namespace.length) {
+        formParam += "[" + namespace.shift() + "]";
+      }
+
+      return {
+        param: formParam,
+        msg: msg,
+        value: value
+      };
+    }
+  })
+);
 
 // Mongoose Collection creation
 require("./models/User");

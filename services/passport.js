@@ -2,6 +2,8 @@ const passport = require("passport");
 const mongoose = require("mongoose");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
+const LocalStrategy = require("passport-local").Strategy;
+const bcrypt = require("bcryptjs");
 
 const keys = require("../config/keys");
 const User = mongoose.model("Users");
@@ -17,6 +19,33 @@ passport.deserializeUser((id, done) => {
     done(null, user);
   });
 });
+
+// Local Strategy
+
+const comparePassword = (userPass, hash, callback) => {
+  bcrypt.compare(userPass, hash, (err, isMatch) => {
+    if (err) throw err;
+    callback(null, isMatch);
+  });
+};
+
+passport.use(
+  new LocalStrategy((username, password, done) => {
+    User.findOne({ username: username }).then(user => {
+      if (!user) {
+        return done(null, false, { message: "Username does not exist" });
+      }
+      comparePassword(password, user.password, (err, isMatch) => {
+        if (err) throw err;
+        if (isMatch) {
+          return done(null, user);
+        } else {
+          return done(null, false, { message: "Password is incorrect" });
+        }
+      });
+    });
+  })
+);
 
 // Verification and Creation of FACEBOOK
 passport.use(

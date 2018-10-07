@@ -8,7 +8,7 @@
     "client": "npm run start --prefix clientside",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "start": "node server.js",
-    "heroku-postbuild": "cd clientside && npm install --only=dev && npm install && npm run build"
+    "heroku-postbuild": "npm install --prefix clientside --only=dev && npm install && npm run build"
   },
   "author": "Zak Ali",
   "license": "ISC",

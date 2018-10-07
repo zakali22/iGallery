@@ -13,6 +13,18 @@
 html {
   // 1rem = 10px ~ 62.5%;
   font-size: 62.5%;
+  @media only screen and (max-width: 75em) {
+    // 1200px
+    font-size: 56.25%; //9px
+  }
+  @media only screen and (max-width: 56.25em) {
+    //900px
+    font-size: 50%; //8px
+  }
+  @media only screen and (max-width: 28.12em) {
+    //430px
+    font-size: 43.75%; //7px
+  }
 }
 
 body {
@@ -21,6 +33,9 @@ body {
   font-weight: 300;
   line-height: 2rem;
   color: #fff;
+  @media only screen and (max-width: 37.5em) {
+    line-height: 5rem;
+  }
 }
 
 .header {

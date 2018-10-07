@@ -96,21 +96,25 @@ class Header extends Component {
         </Link>
         <div className="header__searchContainer">
           {/* Don't forget to change to ReactForm */}
-          <input
-            type="text"
-            name="searchString"
-            className="header__searchContainer--input"
-            placeholder="Search high-resolution images"
-            autoComplete="off"
-            onChange={this.handleChange}
-            value={this.state.search}
-          />
-          <Link to={`/search/${this.state.search}`}>
-            <img
-              src={SearchIcon}
-              className="header__searchContainer--searchIcon"
+          <form>
+            <input
+              type="text"
+              name="searchString"
+              className="header__searchContainer--input"
+              placeholder="Search high-resolution images"
+              autoComplete="off"
+              onChange={this.handleChange}
+              value={this.state.search}
             />
-          </Link>
+            <Link to={`/search/${this.state.search}`}>
+              <button type="submit">
+                <img
+                  src={SearchIcon}
+                  className="header__searchContainer--searchIcon"
+                />
+              </button>
+            </Link>
+          </form>
         </div>
         <nav class="header__nav">
           <div class="header__nav--item">

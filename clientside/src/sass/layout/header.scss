@@ -3,10 +3,25 @@
   justify-content: space-between;
   align-items: center;
   height: 10rem;
+  @media only screen and (max-width: 28.12em) {
+    background-color: black;
+    color: white;
+    height: 12.5rem;
+    padding: 0;
+  }
+
   &__logoIcon {
     margin-left: 3rem;
     height: 5rem;
     width: 5rem;
+    @media only screen and (max-width: 37.5em) {
+      margin-left: 1rem;
+    }
+    @media only screen and (max-width: 28.13em) {
+      margin-top: 1rem;
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
   }
   &--overall {
     background-color: black;
@@ -28,6 +43,13 @@
         font-size: 1.4rem;
       }
     }
+    button {
+      background: none;
+      border: none;
+      @media only screen and (max-width: 29.75em) {
+        display: none;
+      }
+    }
     &--searchIcon {
       height: 1.2rem;
       width: 1.2rem;
@@ -36,12 +58,20 @@
       cursor: pointer;
       z-index: 1;
     }
+    @media only screen and (max-width: 31.25em) and (min-width: 26.88em) {
+      max-width: 50%;
+    }
   }
 
   .logged_in_user--container {
     display: flex;
     align-items: center;
     flex-direction: column;
+    @media only screen and (max-width: 43.75em) {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
   }
 
   &__nav {
@@ -85,6 +115,9 @@
         margin-right: 3rem;
         z-index: 1;
         position: relative;
+        @media only screen and (max-width: 37.5em) {
+          margin-right: 2rem;
+        }
         &::after {
           content: "";
           width: 1rem;
@@ -99,6 +132,9 @@
           transform-origin: 50% 50%;
           transition: transform 0.3s,
             width 0.3s cubic-bezier(0.11, -0.08, 0.43, 1.84) 0.2s;
+          @media only screen and (max-width: 37.5em) {
+            top: 3rem;
+          }
         }
         &:hover::after {
           transform: scale(1, 0.1);
@@ -111,6 +147,11 @@
         padding: 1rem 1.5rem;
         padding-bottom: 1.3rem;
         margin-right: 1rem;
+        @media only screen and (max-width: 37.5em) {
+          border: none;
+          padding: 0;
+          margin: 0;
+        }
       }
     }
   }

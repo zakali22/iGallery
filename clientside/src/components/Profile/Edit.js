@@ -13,6 +13,7 @@ class Edit extends Component {
     last_name: "",
     email: ""
   };
+
   basicValidation = (value, name) => {
     return !value || value.length < 1 ? `Field must be entered` : null;
   };

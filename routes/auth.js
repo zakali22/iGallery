@@ -6,7 +6,7 @@ const toJson = Unsplash.toJson;
 const queryString = require("query-string");
 const axios = require("axios");
 const mongoose = require("mongoose");
-
+const bcrypt = require("bcryptjs");
 // Require the new unsplash instance
 const unsplash = require("../services/unsplash");
 
@@ -87,6 +87,67 @@ module.exports = app => {
     ).then(response => {
       console.log(response);
     });
+    res.send("done");
+  });
+
+  // Register a user
+
+  const registerUser = (newUser, callback) => {
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(newUser.password, salt, (err, hash) => {
+        if (err) {
+          console.log(err);
+        }
+        newUser.password = hash;
+        newUser.save(callback);
+      });
+    });
+  };
+
+  app.post("/api/add", (req, res, next) => {
+    req.checkBody("first_name", "First name is required").notEmpty();
+    req.checkBody("last_name", "Last name is required").notEmpty();
+    req.checkBody("username", "Username is required").notEmpty();
+    req.checkBody("email", "Email is required").notEmpty();
+    if (req.body.email) {
+      req.checkBody("email", "Email is not valid").isEmail();
+    }
+    req.checkBody("password", "Password is required").notEmpty();
+    req
+      .checkBody("confirm_password", "Passwords do not match")
+      .equals(req.body.password);
+
+    let errors = req.validationErrors();
+    if (errors) {
+      console.log(errors);
+      res.send({ error: errors });
+    } else {
+      const user = new User({
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password
+      });
+
+      User.findOne({ email: req.body.email }).then(profile => {
+        if (profile) {
+          res.send({ exists: { msg: "Email already exists" } });
+        } else {
+          registerUser(user, (err, user) => {
+            console.log(user);
+            if (err) {
+              console.log(err);
+            }
+          });
+          res.send({ success: "Successfully registered" });
+        }
+      });
+    }
+  });
+
+  app.post("/api/login", (req, res) => {
+    console.log("got");
     res.send("done");
   });
 

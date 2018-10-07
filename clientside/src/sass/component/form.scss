@@ -5,6 +5,24 @@
   align-items: center;
   color: var(--black);
   margin-top: 4rem;
+  .errors {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    &-list {
+      list-style: none;
+      padding: 0;
+      width: 60%;
+      li {
+        padding: 1rem;
+        background: var(--light-red);
+        border-radius: 5px;
+        &:not(:last-child) {
+          margin-bottom: 0.7rem;
+        }
+      }
+    }
+  }
   #validate-form {
     display: flex;
     flex-direction: column;

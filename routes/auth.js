@@ -25,7 +25,7 @@ module.exports = app => {
     "/auth/google/callback",
     passport.authenticate("google"),
     (req, res) => {
-      res.redirect("http://localhost:3000/");
+      res.redirect("/");
     }
   );
 
@@ -41,7 +41,7 @@ module.exports = app => {
     "/auth/facebook/callback",
     passport.authenticate("facebook"),
     (req, res) => {
-      res.redirect("http://localhost:3000/");
+      res.redirect("/");
     }
   );
 
@@ -185,6 +185,6 @@ module.exports = app => {
   app.get("/api/logout", (req, res) => {
     req.logout();
     console.log(req.user);
-    res.redirect("http://localhost:3000/");
+    res.redirect("/");
   });
 };

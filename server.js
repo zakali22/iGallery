@@ -10,6 +10,7 @@ const session = require("express-session");
 const path = require("path");
 // Require the keys
 const keys = require("./config/keys");
+require("dotenv").config();
 
 // Header 'Allow-origin'
 app.use(function(req, res, next) {
@@ -42,7 +43,14 @@ mongoose.connect(keys.mongoURI);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+// ... other app.use middleware setups
+app.use(express.static(path.join(__dirname, "clientside", "build")));
+
+// ...
+// Right before your app.listen(), add this:
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "clientside", "build", "index.html"));
+});
 
 // Cookie session
 app.use(

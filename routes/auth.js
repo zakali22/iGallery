@@ -1,8 +1,4 @@
 const passport = require("passport");
-require("es6-promise").polyfill();
-require("isomorphic-fetch");
-const Unsplash = require("unsplash-js").default;
-const toJson = Unsplash.toJson;
 const queryString = require("query-string");
 const axios = require("axios");
 const mongoose = require("mongoose");

@@ -1,9 +1,3 @@
-require("es6-promise").polyfill();
-require("isomorphic-fetch");
-const Unsplash = require("unsplash-js").default;
-const toJson = Unsplash.toJson;
-// Require the authentication parameters
-
 const axios = require("axios");
 const queryString = require("query-string");
 const mongoose = require("mongoose");

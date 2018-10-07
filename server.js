@@ -103,8 +103,6 @@ app.use(
 require("./models/User");
 require("./services/passport");
 
-// Unsplash API
-require("./services/unsplash.js");
 // Routes
 require("./routes/auth")(app);
 require("./routes/api")(app);

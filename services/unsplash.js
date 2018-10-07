@@ -1,5 +1,4 @@
 const Unsplash = require("unsplash-js").default;
-const keys = require("../config/keys");
 
 const unsplash = new Unsplash({
   applicationId: keys.unsplashKey,

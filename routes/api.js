@@ -12,8 +12,6 @@ const mongoose = require("mongoose");
 const Fs = require("fs");
 const Path = require("path");
 
-const keys = require("../config/keys");
-
 const User = mongoose.model("Users");
 
 const requireLogin = require("../middleware/requireLogin");

@@ -5,7 +5,6 @@ const FacebookStrategy = require("passport-facebook").Strategy;
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
 
-const keys = require("../config/keys");
 const User = mongoose.model("Users");
 
 // Serialization

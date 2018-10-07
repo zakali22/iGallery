@@ -11,7 +11,8 @@ import { connect } from "react-redux";
 class Login extends Component {
   state = {
     username: "",
-    password: ""
+    password: "",
+    errors: []
   };
 
   handleChange = event => {
@@ -22,12 +23,24 @@ class Login extends Component {
   };
 
   handleSubmit = async () => {
+    this.setState({
+      errors: []
+    });
     const res = await axios.post("/api/logUser", {
       username: this.state.username,
       password: this.state.password
     });
     if (res.data.success) {
       this.props.history.push("/");
+    }
+    if (res.data.message) {
+      const errors = this.state.errors;
+      errors.push(res.data.message);
+
+      this.setState({
+        errors: errors
+      });
+      console.log(this.state.errors);
     }
   };
 
@@ -37,6 +50,15 @@ class Login extends Component {
         <Header className="header header--overall" />
         <div className="form-container">
           <h1>Login</h1>
+          {this.state.errors.length > 0 ? (
+            <div className="errors">
+              <ul className="errors-list">
+                {this.state.errors.map((error, i) => {
+                  return <li key={i}>{error}</li>;
+                })}
+              </ul>
+            </div>
+          ) : null}
           <Form id="validate-form">
             <Text
               field="username"

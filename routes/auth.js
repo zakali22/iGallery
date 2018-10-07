@@ -153,15 +153,34 @@ module.exports = app => {
     }
   });
 
-  app.post(
-    "/api/logUser",
-    passport.authenticate("local", {
-      failureRedirect: "http://localhost:3000/login"
-    }),
-    function(req, res) {
-      res.send({ success: "Logged in" });
-    }
-  );
+  // app.post(
+  //   "/api/logUser",
+  //   passport.authenticate("local", {
+  //     failureRedirect: "http://localhost:3000/",
+  //     failureFlash: true
+  //   }),
+  //   function(req, res) {
+  //     res.send({ success: "Logged in" });
+  //   }
+  // );
+
+  app.post("/api/logUser", function(req, res, next) {
+    passport.authenticate("local", function(err, user, info) {
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        console.log(info);
+        return res.send(info);
+      }
+      req.logIn(user, function(err) {
+        if (err) {
+          return next(err);
+        }
+        return res.send({ success: "Successfully logged in" });
+      });
+    })(req, res, next);
+  });
 
   app.get("/api/logout", (req, res) => {
     req.logout();

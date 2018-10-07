@@ -8,20 +8,10 @@ import FacebookIcon from "../../img/icon-facebook.svg";
 
 import axios from "axios";
 import { connect } from "react-redux";
-
 class Login extends Component {
   state = {
     username: "",
     password: ""
-  };
-  basicValidation = (value, name) => {
-    return !value || value.length < 1 ? `Field must be entered` : null;
-  };
-
-  passwordLengthValidation = value => {
-    return !value || value.length < 5
-      ? "Passsword must be at least 5 characters"
-      : null;
   };
 
   handleChange = event => {
@@ -32,12 +22,13 @@ class Login extends Component {
   };
 
   handleSubmit = async () => {
-    const res = await axios.post(`/api/login`, {
+    const res = await axios.post("/api/logUser", {
       username: this.state.username,
       password: this.state.password
     });
-
-    this.props.history.push("/profile");
+    if (res.data.success) {
+      this.props.history.push("/");
+    }
   };
 
   render() {
@@ -52,9 +43,6 @@ class Login extends Component {
               name="username"
               id="validate-username"
               placeholder="Username"
-              validateOnChange
-              validateOnBlur
-              validate={this.basicValidation}
               onChange={this.handleChange}
             />
             <Text
@@ -62,12 +50,10 @@ class Login extends Component {
               name="password"
               id="validate-password"
               placeholder="Password"
-              validateOnChange
-              validateOnBlur
-              validate={this.passwordLengthValidation}
               onChange={this.handleChange}
+              type="password"
             />
-            <button onClick={this.handlSubmit} type="submit">
+            <button type="submit" onClick={this.handleSubmit}>
               Submit
             </button>
           </Form>

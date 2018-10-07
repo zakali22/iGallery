@@ -127,29 +127,41 @@ module.exports = app => {
         last_name: req.body.last_name,
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        name: `${req.body.first_name} ${req.body.last_name}`
       });
 
       User.findOne({ email: req.body.email }).then(profile => {
         if (profile) {
           res.send({ exists: { msg: "Email already exists" } });
         } else {
-          registerUser(user, (err, user) => {
-            console.log(user);
-            if (err) {
-              console.log(err);
+          User.findOne({ username: req.body.username }).then(profile => {
+            if (profile) {
+              res.send({ exists: { msg: "Username already taken" } });
+            } else {
+              registerUser(user, (err, user) => {
+                console.log(user);
+                if (err) {
+                  console.log(err);
+                }
+              });
+              res.send({ success: "Successfully registered" });
             }
           });
-          res.send({ success: "Successfully registered" });
         }
       });
     }
   });
 
-  app.post("/api/login", (req, res) => {
-    console.log("got");
-    res.send("done");
-  });
+  app.post(
+    "/api/logUser",
+    passport.authenticate("local", {
+      failureRedirect: "http://localhost:3000/login"
+    }),
+    function(req, res) {
+      res.send({ success: "Logged in" });
+    }
+  );
 
   app.get("/api/logout", (req, res) => {
     req.logout();

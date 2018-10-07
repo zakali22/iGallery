@@ -9,7 +9,11 @@ const userSchema = new Schema({
   password: String,
   first_name: String,
   last_name: String,
-  image: String,
+  image: {
+    type: String,
+    default:
+      "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=113636006274386&height=50&width=50&ext=1541469489&hash=AeRoGBFqPCzpHyQ2"
+  },
   downloadedImages: {
     type: Array,
     default: []

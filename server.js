@@ -38,7 +38,17 @@ app.use(function(req, res, next) {
 });
 
 // Mongoose
-mongoose.connect(keys.mongoURI);
+var url = process.env.MONGO_URI || "mongodb://localhost:27017/igallery";
+mongoose.connect(
+  url,
+  { useNewUrlParser: true }
+);
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", function() {
+  // we're connected!
+  console.log("Database connected");
+});
 // Body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

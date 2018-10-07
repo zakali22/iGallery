@@ -31,6 +31,7 @@
     "mongoose": "^5.2.18",
     "node-fetch": "^2.2.0",
     "nodemon": "^1.18.4",
+    "parse-mongo-url": "^1.1.1",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "passport-google-oauth20": "^1.0.0",

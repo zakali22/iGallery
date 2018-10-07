@@ -8,9 +8,8 @@ const cookieSession = require("cookie-session");
 const expressValidator = require("express-validator");
 const session = require("express-session");
 const path = require("path");
-// Require the keys
 
-require("dotenv").config();
+// Require the keys
 
 // Header 'Allow-origin'
 app.use(function(req, res, next) {
@@ -38,12 +37,15 @@ app.use(function(req, res, next) {
 });
 
 // Mongoose
-
-var url = process.env.MONGO_URI || "mongodb://localhost:27017/igallery";
-mongoose.connect(
-  url,
-  { useNewUrlParser: true }
-);
+var uri = process.env.MONGO_URI;
+mongoose
+  .connect(
+    process.env.MONGO_URI,
+    { useNewUrlParser: true }
+  )
+  .then(connection => {
+    console.log("Connected to MongoDB");
+  });
 
 // Body parser
 app.use(bodyParser.json());

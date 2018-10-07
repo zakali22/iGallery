@@ -39,9 +39,9 @@ app.use(function(req, res, next) {
 
 // Mongoose
 
-console.log(process.env.MONGO_URI);
+var url = process.env.MONGO_URI;
 mongoose.connect(
-  process.env.MONGO_URI,
+  url,
   { useNewUrlParser: true }
 );
 

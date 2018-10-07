@@ -7,8 +7,6 @@ const queryString = require("query-string");
 const axios = require("axios");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-// Require the new unsplash instance
-const unsplash = require("../services/unsplash");
 
 const User = mongoose.model("Users");
 
@@ -44,28 +42,6 @@ module.exports = app => {
       res.redirect("/");
     }
   );
-
-  // UNSPLASH
-  app.get("/auth/unsplash", (req, res) => {
-    console.log("redirected");
-    res.redirect(
-      unsplash.auth.getAuthenticationUrl(["public", "read_user", "read_photos"])
-    );
-  });
-  app.get("/auth/unsplash/callback", (req, res) => {
-    axios
-      .post("https://unsplash.com/oauth/token", {
-        client_id: unsplash._applicationId,
-        client_secret: unsplash._secret,
-        redirect_uri: unsplash._callbackUrl,
-        code: req.query.code,
-        grant_type: "authorization_code"
-      })
-      .then(response => {
-        unsplash.auth.setBearerToken(response.data.access_token);
-        res.send("Redirecting from unsplash...");
-      });
-  });
 
   app.get("/api/current_user", (req, res) => {
     console.log(req.user);

@@ -3,7 +3,7 @@ require("isomorphic-fetch");
 const Unsplash = require("unsplash-js").default;
 const toJson = Unsplash.toJson;
 // Require the authentication parameters
-const unsplash = require("../services/unsplash");
+
 const axios = require("axios");
 const queryString = require("query-string");
 const mongoose = require("mongoose");
@@ -23,7 +23,7 @@ module.exports = app => {
       method: "GET",
       url: `https://api.unsplash.com/photos?per_page=100&page=${
         req.params.page
-      }&client_id=${keys.unsplashKey}`
+      }&client_id=${process.env.UNSPLASH_KEY}`
     }).then(response => {
       const photos = response.data;
       let photoArray = [];
@@ -62,7 +62,7 @@ module.exports = app => {
     axios({
       method: "GET",
       url: `https://api.unsplash.com/photos/${req.params.id}?client_id=${
-        keys.unsplashKey
+        process.env.UNSPLASH_KEY
       }`
     }).then(response => {
       const data = response.data;
@@ -85,7 +85,7 @@ module.exports = app => {
     axios({
       method: "GET",
       url: `https://api.unsplash.com/photos/${req.params.id}?client_id=${
-        keys.unsplashKey
+        process.env.UNSPLASH_KEY
       }`
     }).then(response => {
       if (req.user.downloadedImages.length === 0) {
@@ -145,7 +145,7 @@ module.exports = app => {
       method: "GET",
       url: `https://api.unsplash.com/search/photos/?per_page=180&page=${
         req.params.page
-      }&query=${req.body.search}&client_id=${keys.unsplashKey}`
+      }&query=${req.body.search}&client_id=${process.env.UNSPLASH_KEY}`
     }).then(response => {
       const photos = response.data.results;
       let photoArray = [];
@@ -187,7 +187,7 @@ module.exports = app => {
       method: "GET",
       url: `https://api.unsplash.com/search/users?page=1&query=${
         req.body.search
-      }&client_id=${keys.unsplashKey}`
+      }&client_id=${process.env.UNSPLASH_KEY}`
     }).then(response => {
       res.send(response);
     });
@@ -198,7 +198,7 @@ module.exports = app => {
     axios({
       method: "GET",
       url: `https://api.unsplash.com/users/${req.params.username}?client_id=${
-        keys.unsplashKey
+        process.env.UNSPLASH_KEY
       }`
     }).then(response => {
       res.send(response.data);
@@ -212,7 +212,7 @@ module.exports = app => {
       method: "GET",
       url: `https://api.unsplash.com/users/${
         req.params.username
-      }/photos?client_id=${keys.unsplashKey}`
+      }/photos?client_id=${process.env.UNSPLASH_KEY}`
     }).then(response => {
       res.send(response.data);
     });

@@ -38,7 +38,7 @@ app.use(function(req, res, next) {
 });
 
 // Mongoose
-var url = process.env.MONGO_URI || "mongodb://localhost:27017/igallery";
+var url = process.env.MONGO_URI;
 mongoose.connect(
   url,
   { useNewUrlParser: true }

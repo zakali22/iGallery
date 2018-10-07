@@ -9,7 +9,7 @@ const expressValidator = require("express-validator");
 const session = require("express-session");
 const path = require("path");
 // Require the keys
-const keys = require("./config/keys");
+
 require("dotenv").config();
 
 // Header 'Allow-origin'
@@ -38,17 +38,13 @@ app.use(function(req, res, next) {
 });
 
 // Mongoose
-var url = process.env.MONGO_URI;
+
+console.log(process.env.MONGO_URI);
 mongoose.connect(
-  url,
+  process.env.MONGO_URI,
   { useNewUrlParser: true }
 );
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", function() {
-  // we're connected!
-  console.log("Database connected");
-});
+
 // Body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -66,7 +62,7 @@ app.get("*", (req, res) => {
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days expiry
-    keys: [keys.cookieKey]
+    keys: [process.env.COOKIE_KEY]
   })
 );
 

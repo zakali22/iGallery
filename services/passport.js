@@ -51,8 +51,8 @@ passport.use(
 passport.use(
   new FacebookStrategy(
     {
-      clientID: process.env.facebookKey,
-      clientSecret: process.env.facebookSecret,
+      clientID: process.env.FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
       callbackURL: "/auth/facebook/callback",
       profileFields: [
         "id",
@@ -93,8 +93,8 @@ passport.use(
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.googleClientID,
-      clientSecret: process.env.googleClientSecret,
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: "/auth/google/callback"
     },
     (accessToken, refreshToken, profile, done) => {

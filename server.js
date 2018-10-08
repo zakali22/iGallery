@@ -98,11 +98,18 @@ require("./routes/api")(app);
 
 // Conditional Production environment
 if (process.env.NODE_ENV === "production") {
-  // Serve up the clientside
   app.use(express.static("clientside/build"));
-
-  // If route is unknown
-  app.get("*", (req, res) => {
+  const path = require("path");
+  app.get("/", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "clientside", "build", "index.html"));
+  });
+  app.get("/discover", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "clientside", "build", "index.html"));
+  });
+  app.get("/photo/:id", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "clientside", "build", "index.html"));
+  });
+  app.get("/search/:search", (req, res) => {
     res.sendFile(path.resolve(__dirname, "clientside", "build", "index.html"));
   });
 }

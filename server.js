@@ -57,14 +57,18 @@ db.once("open", function() {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-// ... other app.use middleware setups
-app.use(express.static(path.join(__dirname, "clientside", "build")));
+// // ... other app.use middleware setups
+// app.use(express.static(path.join(__dirname, "clientside", "build")));
+//
+// // ...
+// // Right before your app.listen(), add this:
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "clientside", "build", "index.html"));
+// });
 
-// ...
-// Right before your app.listen(), add this:
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "clientside", "build", "index.html"));
-});
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("clientside/build"));
+}
 
 // Cookie session
 app.use(

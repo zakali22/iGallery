@@ -96,13 +96,6 @@ require("./services/passport");
 require("./routes/auth")(app);
 require("./routes/api")(app);
 
-var reqTimer = setTimeout(function wakeUp() {
-  request("https://igallery-prod.herokuapp.com", function() {
-    console.log("WAKE UP DYNO");
-  });
-  return (reqTimer = setTimeout(wakeUp, 1200000));
-}, 1200000);
-
 // Conditional Production environment
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("clientside/build"));

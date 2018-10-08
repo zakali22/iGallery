@@ -8,17 +8,8 @@ const cookieSession = require("cookie-session");
 const expressValidator = require("express-validator");
 const session = require("express-session");
 const path = require("path");
-const morgan = require("morgan");
-const compression = require("compression");
 
-require("dotenv").config();
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("clientside/build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "clientside", "build", "index.html"));
-  });
-}
+const keys = require("./config/keys");
 
 // Header 'Allow-origin'
 app.use(function(req, res, next) {
@@ -45,26 +36,25 @@ app.use(function(req, res, next) {
   next();
 });
 
-mongoose.connect(
-  process.env.MONGODB_URI,
-  { useNewUrlParser: true },
-  function(error) {
-    if (error) console.error(error);
-    else console.log("mongo connected");
-  }
-);
-
-var db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-
-db.once("open", function() {
-  console.log("DB connection alive");
-});
+const url = keys.mongo_uri;
+mongoose.connect();
 
 // Body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+// // ... other app.use middleware setups
+// app.use(express.static(path.join(__dirname, "clientside", "build")));
+//
+// // ...
+// // Right before your app.listen(), add this:
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "clientside", "build", "index.html"));
+// });
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("clientside/build"));
+}
 
 // Cookie session
 app.use(

@@ -7,6 +7,8 @@ const bcrypt = require("bcryptjs");
 
 const User = mongoose.model("Users");
 
+const keys = require("./config/keys");
+
 // Serialization
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -50,8 +52,8 @@ passport.use(
 passport.use(
   new FacebookStrategy(
     {
-      clientID: process.env.FACEBOOK_CLIENT_ID,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+      clientID: keys.facebookKey,
+      clientSecret: keys.facebookSecret,
       callbackURL: "/auth/facebook/callback",
       profileFields: [
         "id",
@@ -92,8 +94,8 @@ passport.use(
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientID: keys.googleClientID,
+      clientSecret: keys.googleClientSecret,
       callbackURL: "/auth/google/callback"
     },
     (accessToken, refreshToken, profile, done) => {

@@ -1,10 +1,11 @@
 const axios = require("axios");
 const queryString = require("query-string");
 const mongoose = require("mongoose");
-
 // Required to download file
 const Fs = require("fs");
 const Path = require("path");
+
+const keys = require("../config/keys");
 
 const User = mongoose.model("Users");
 
@@ -56,7 +57,7 @@ module.exports = app => {
     axios({
       method: "GET",
       url: `https://api.unsplash.com/photos/${req.params.id}?client_id=${
-        process.env.UNSPLASH_KEY
+        keys.unsplashKey
       }`
     }).then(response => {
       const data = response.data;
@@ -79,7 +80,7 @@ module.exports = app => {
     axios({
       method: "GET",
       url: `https://api.unsplash.com/photos/${req.params.id}?client_id=${
-        process.env.UNSPLASH_KEY
+        keys.unsplashKey
       }`
     }).then(response => {
       if (req.user.downloadedImages.length === 0) {
@@ -139,7 +140,7 @@ module.exports = app => {
       method: "GET",
       url: `https://api.unsplash.com/search/photos/?per_page=180&page=${
         req.params.page
-      }&query=${req.body.search}&client_id=${process.env.UNSPLASH_KEY}`
+      }&query=${req.body.search}&client_id=${keys.unsplashKey}`
     }).then(response => {
       const photos = response.data.results;
       let photoArray = [];
@@ -181,7 +182,7 @@ module.exports = app => {
       method: "GET",
       url: `https://api.unsplash.com/search/users?page=1&query=${
         req.body.search
-      }&client_id=${process.env.UNSPLASH_KEY}`
+      }&client_id=${keys.unsplashKey}`
     }).then(response => {
       res.send(response);
     });
@@ -192,7 +193,7 @@ module.exports = app => {
     axios({
       method: "GET",
       url: `https://api.unsplash.com/users/${req.params.username}?client_id=${
-        process.env.UNSPLASH_KEY
+        keys.unsplashKey
       }`
     }).then(response => {
       res.send(response.data);
@@ -206,7 +207,7 @@ module.exports = app => {
       method: "GET",
       url: `https://api.unsplash.com/users/${
         req.params.username
-      }/photos?client_id=${process.env.UNSPLASH_KEY}`
+      }/photos?client_id=${keys.unsplashKey}`
     }).then(response => {
       res.send(response.data);
     });

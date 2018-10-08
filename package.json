@@ -6,9 +6,7 @@
   "scripts": {
     "server": "nodemon server.js",
     "client": "npm run start --prefix clientside",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "start": "node server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix clientside && npm run build --prefix clientside"
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Zak Ali",
   "license": "ISC",

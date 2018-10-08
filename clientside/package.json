@@ -4,10 +4,10 @@
   "private": true,
   "proxy": {
     "/auth/*": {
-      "target": "https://protected-plains-13590.herokuapp.com/"
+      "target": "http://localhost:5000"
     },
     "/api/*": {
-      "target": "https://protected-plains-13590.herokuapp.com/"
+      "target": "http://localhost:5000"
     }
   },
   "dependencies": {

@@ -18,7 +18,7 @@ module.exports = app => {
       method: "GET",
       url: `https://api.unsplash.com/photos?per_page=100&page=${
         req.params.page
-      }&client_id=${process.env.UNSPLASH_KEY}`
+      }&client_id=${keys.unsplashKey}`
     }).then(response => {
       const photos = response.data;
       let photoArray = [];

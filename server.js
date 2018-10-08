@@ -14,7 +14,7 @@ const keys = require("./config/keys");
 // Header 'Allow-origin'
 app.use(function(req, res, next) {
   // Website you wish to allow to connect
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
 
   // Request methods you wish to allow
   res.setHeader(
@@ -37,7 +37,10 @@ app.use(function(req, res, next) {
 });
 
 const url = keys.mongo_uri;
-mongoose.connect();
+mongoose.connect(
+  url,
+  { useNewUrlParser: true }
+);
 
 // Body parser
 app.use(bodyParser.json());
@@ -60,7 +63,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days expiry
-    keys: [process.env.COOKIE_KEY]
+    keys: [keys.cookieKey]
   })
 );
 
@@ -108,5 +111,5 @@ require("./routes/api")(app);
 // Conditional Production environment
 
 // Port
-const PORT = process.env.PORT || 500;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT);

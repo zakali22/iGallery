@@ -7,7 +7,7 @@ const bcrypt = require("bcryptjs");
 
 const User = mongoose.model("Users");
 
-const keys = require("./config/keys");
+const keys = require("../config/keys");
 
 // Serialization
 passport.serializeUser((user, done) => {

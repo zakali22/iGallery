@@ -6,7 +6,8 @@
   "scripts": {
     "server": "nodemon server.js",
     "client": "npm run start --prefix clientside",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "node server.js"
   },
   "author": "Zak Ali",
   "license": "ISC",
@@ -43,6 +44,7 @@
     "unsplash-js": "^4.8.0"
   },
   "engines": {
-    "node": "10.10.0"
+    "node": "10.10.0",
+    "npm": "6.4.1"
   }
 }

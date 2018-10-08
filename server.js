@@ -8,8 +8,28 @@ const cookieSession = require("cookie-session");
 const expressValidator = require("express-validator");
 const session = require("express-session");
 const path = require("path");
+const morgan = require("morgan");
+const compression = require("compression");
+
+const dev = app.get("env") !== "production";
 
 require("dotenv").config();
+
+if (!dev) {
+  app.disable("x-powered-by");
+  app.use(compression());
+  app.use(morgan("common"));
+
+  app.use(express.static(path.resolve(__dirname, "clientside", "build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "clientside", "build", "index.html"));
+  });
+}
+
+if (dev) {
+  app.use(morgan("dev"));
+}
 
 // Header 'Allow-origin'
 app.use(function(req, res, next) {
@@ -57,18 +77,6 @@ db.once("open", function() {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-// // ... other app.use middleware setups
-// app.use(express.static(path.join(__dirname, "clientside", "build")));
-//
-// // ...
-// // Right before your app.listen(), add this:
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "clientside", "build", "index.html"));
-// });
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("clientside/build"));
-}
 
 // Cookie session
 app.use(

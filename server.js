@@ -9,7 +9,7 @@ const expressValidator = require("express-validator");
 const session = require("express-session");
 const path = require("path");
 
-// Require the keys
+require("dotenv").config();
 
 // Header 'Allow-origin'
 app.use(function(req, res, next) {
@@ -36,16 +36,22 @@ app.use(function(req, res, next) {
   next();
 });
 
-// Mongoose
-var uri = process.env.MONGO_URI;
-mongoose
-  .connect(
-    process.env.MONGO_URI,
-    { useNewUrlParser: true }
-  )
-  .then(connection => {
-    console.log("Connected to MongoDB");
-  });
+console.log(process.env.MONGODB_URI);
+mongoose.connect(
+  process.env.MONGODB_URI,
+  { useNewUrlParser: true },
+  function(error) {
+    if (error) console.error(error);
+    else console.log("mongo connected");
+  }
+);
+
+var db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+
+db.once("open", function() {
+  console.log("DB connection alive");
+});
 
 // Body parser
 app.use(bodyParser.json());
@@ -113,4 +119,4 @@ require("./routes/api")(app);
 
 // Port
 const PORT = process.env.PORT || 500;
-app.listen(5000);
+app.listen(PORT);

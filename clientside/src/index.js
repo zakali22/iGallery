@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./sass/index.scss";
 import App from "./components/App";
-import registerServiceWorker from "./registerServiceWorker";
 
 import { createStore, applyMiddleware, compose } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
@@ -42,4 +41,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("root")
 );
-registerServiceWorker();

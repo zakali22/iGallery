@@ -97,7 +97,7 @@ require("./routes/auth")(app);
 require("./routes/api")(app);
 
 var reqTimer = setTimeout(function wakeUp() {
-  request("https://nameless-gorge-19527.herokuapp.com", function() {
+  request("https://igallery-prod.herokuapp.com", function() {
     console.log("WAKE UP DYNO");
   });
   return (reqTimer = setTimeout(wakeUp, 1200000));

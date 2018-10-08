@@ -46,18 +46,6 @@ mongoose.connect(
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-// // ... other app.use middleware setups
-// app.use(express.static(path.join(__dirname, "clientside", "build")));
-//
-// // ...
-// // Right before your app.listen(), add this:
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "clientside", "build", "index.html"));
-// });
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("clientside/build"));
-}
 
 // Cookie session
 app.use(
@@ -109,6 +97,15 @@ require("./routes/auth")(app);
 require("./routes/api")(app);
 
 // Conditional Production environment
+if (process.env.NODE_ENV === "production") {
+  // Serve up the clientside
+  app.use(express.static("clientside/build"));
+
+  // If route is unknown
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "clientside", "build", "index.html"));
+  });
+}
 
 // Port
 const PORT = process.env.PORT || 5000;

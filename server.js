@@ -14,7 +14,10 @@ const keys = require("./config/keys");
 // Header 'Allow-origin'
 app.use(function(req, res, next) {
   // Website you wish to allow to connect
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://igallery-prod.herokuapp.com/"
+  );
 
   // Request methods you wish to allow
   res.setHeader(

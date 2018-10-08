@@ -122,7 +122,6 @@ class Header extends Component {
               <Link to={"/discover"}>discover</Link>
             </span>
           </div>
-          // {this.handleUserCheck()}
         </nav>
       </header>
     );

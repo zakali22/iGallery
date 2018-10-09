@@ -106,6 +106,12 @@ if (process.env.NODE_ENV === "production") {
   app.get("/discover", (req, res) => {
     res.sendFile(path.resolve(__dirname, "clientside", "build", "index.html"));
   });
+  app.get("/profile", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "clientside", "build", "index.html"));
+  });
+  app.get("/edit/:id", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "clientside", "build", "index.html"));
+  });
   app.get("/photo/:id", (req, res) => {
     res.sendFile(path.resolve(__dirname, "clientside", "build", "index.html"));
   });

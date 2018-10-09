@@ -96,27 +96,41 @@ require("./services/passport");
 require("./routes/auth")(app);
 require("./routes/api")(app);
 
+process.env.PWD = process.cwd();
+
 // Conditional Production environment
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("clientside/build"));
   const path = require("path");
   app.get("/", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "clientside", "build", "index.html"));
+    res.sendFile(
+      path.resolve(process.env.PWD, "clientside", "build", "index.html")
+    );
   });
   app.get("/discover", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "clientside", "build", "index.html"));
+    res.sendFile(
+      path.resolve(process.env.PWD, "clientside", "build", "index.html")
+    );
   });
   app.get("/profile", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "clientside", "build", "index.html"));
+    res.sendFile(
+      path.resolve(process.env.PWD, "clientside", "build", "index.html")
+    );
   });
   app.get("/edit/:id", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "clientside", "build", "index.html"));
+    res.sendFile(
+      path.resolve(process.env.PWD, "clientside", "build", "index.html")
+    );
   });
   app.get("/photo/:id", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "clientside", "build", "index.html"));
+    res.sendFile(
+      path.resolve(process.env.PWD, "clientside", "build", "index.html")
+    );
   });
   app.get("/search/:search", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "clientside", "build", "index.html"));
+    res.sendFile(
+      path.resolve(process.env.PWD, "clientside", "build", "index.html")
+    );
   });
 }
 

@@ -30,10 +30,44 @@ class Discover extends Component {
   };
 
   render() {
+    const columns = this.props.unsplash.data;
+    console.log(columns);
     return (
-      <div>
+      <div className="container">
         <Header className="header header--overall" />
-        <h1>Discover</h1>
+        <div className="images__tile">
+          {columns.map((column, i) => {
+            return (
+              <Slide bottom delay={i * 100}>
+                <div className="images__tile__column">
+                  {column.map((image, i) => {
+                    return (
+                      <div className="images__tile__column--container">
+                        <Link to={`/photo/${image.photo.id}`}>
+                          <img
+                            src={image.photo.url}
+                            className="images__tile__column--image"
+                          />
+                        </Link>
+                        <span className="images__tile__column--details">
+                          <img src={image.user.image} />
+                          <a href={image.user.link}>
+                            <p>{image.user.name}</p>
+                          </a>
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </Slide>
+            );
+          })}
+        </div>
+        <div className="loadmore">
+          <div className="container__button" onClick={this.loadmore}>
+            <span className="container__button--text">Load more</span>
+          </div>
+        </div>
       </div>
     );
   }

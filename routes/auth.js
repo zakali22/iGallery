@@ -91,7 +91,6 @@ module.exports = app => {
       });
       registerUser(user, (err, user) => {
         res.send({ success: "Successfully registered" });
-        sendEmail(user.email, user.first_name, null, "welcome");
         if (err) {
         }
       });

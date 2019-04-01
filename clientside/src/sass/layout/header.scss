@@ -15,19 +15,20 @@
     height: 5rem;
     width: 5rem;
     @media only screen and (max-width: 37.5em) {
-      margin-left: 1rem;
-    }
-    @media only screen and (max-width: 28.13em) {
-      margin-top: 1rem;
-      margin-left: 1rem;
-      margin-right: 1rem;
+      margin-top: 1.5rem;
     }
   }
+
   &--overall {
     background-color: black;
   }
   &__searchContainer {
     flex: 0 0 45%;
+
+    @media only screen and (max-width: 37.5em) {
+      flex: 0 0 1%;
+    }
+
     &--input {
       width: 80%;
       border: none;
@@ -41,6 +42,9 @@
       }
       &::-webkit-input-placeholder {
         font-size: 1.4rem;
+      }
+      @media only screen and (max-width: 37.5em) {
+        margin-left: 3rem;
       }
     }
     button {
@@ -57,9 +61,6 @@
       border: none;
       cursor: pointer;
       z-index: 1;
-    }
-    @media only screen and (max-width: 31.25em) and (min-width: 26.88em) {
-      max-width: 50%;
     }
   }
 
@@ -81,6 +82,8 @@
     padding: 1rem;
     padding-right: 3rem;
     position: relative;
+    @media only screen and (max-width: 28.13em) {
+    }
     &--user {
       cursor: pointer;
       img {
@@ -118,6 +121,9 @@
         @media only screen and (max-width: 37.5em) {
           margin-right: 2rem;
         }
+        @media only screen and (max-width: 28.13em) {
+          margin-right: 0;
+        }
         &::after {
           content: "";
           width: 1rem;
@@ -152,7 +158,54 @@
           padding: 0;
           margin: 0;
         }
+        @media only screen and (max-width: 28.13em) {
+        }
       }
     }
+    &--text {
+      @media only screen and (max-width: 28.13em) {
+        font-size: 2.5rem;
+      }
+    }
+  }
+}
+
+#myLinks {
+  display: none;
+  @media only screen and (max-width: 37.5em) {
+    padding-top: 3rem;
+    display: none;
+    flex-direction: column;
+    background: black;
+  }
+}
+
+nav {
+  @media only screen and (max-width: 37.5em) {
+    background: black;
+  }
+}
+
+.mobileicon {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  i {
+    font-size: 5rem;
+    cursor: pointer;
+  }
+  @media only screen and (min-width: 37.56em) {
+    display: none;
+  }
+}
+.default {
+  @media only screen and (max-width: 37.5em) {
+    display: none;
+  }
+}
+
+.first {
+  @media only screen and (min-width: 37.56em) {
+    display: none;
   }
 }

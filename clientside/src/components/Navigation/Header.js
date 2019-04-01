@@ -91,43 +91,96 @@ class Header extends Component {
       search: e.target.value
     });
   };
+
+  openMobileNav = () => {
+    console.log(this.navElement.style.display);
+    if (this.navElement.style.display === "flex") {
+      this.navElement.style.display = "none";
+    } else {
+      this.navElement.style.display = "flex";
+    }
+  };
   render() {
     return (
-      <header className={this.props.className}>
-        <Link to={"/"}>
-          <img src={LogoIcon} className="header__logoIcon" />
-        </Link>
-        <div className="header__searchContainer">
-          {/* Don't forget to change to ReactForm */}
-          <form>
-            <input
-              type="text"
-              name="searchString"
-              className="header__searchContainer--input"
-              placeholder="Search high-resolution images"
-              autoComplete="off"
-              onChange={this.handleChange}
-              value={this.state.search}
-            />
-            <Link to={`/search/${this.state.search}`}>
-              <button type="submit">
-                <img
-                  src={SearchIcon}
-                  className="header__searchContainer--searchIcon"
-                />
-              </button>
-            </Link>
-          </form>
-        </div>
-        <nav class="header__nav">
-          <div class="header__nav--item">
-            <span class="header__nav--text">
-              <Link to={"/discover"}>discover</Link>
-            </span>
+      <React.Fragment>
+        <nav>
+          <Link to={"/"} className="first">
+            <img src={LogoIcon} className="header__logoIcon" />
+          </Link>
+          {/* Mobile button icon */}
+          <div className="mobileicon" onClick={this.openMobileNav}>
+            <i class="fa fa-bars" />
           </div>
-          {this.handleUserCheck()}
         </nav>
-      </header>
+        <div id="myLinks" ref={element => (this.navElement = element)}>
+          <div className="header__searchContainer">
+            {/* Don't forget to change to ReactForm */}
+            <form>
+              <input
+                type="text"
+                name="searchString"
+                className="header__searchContainer--input"
+                placeholder="Search high-resolution images"
+                autoComplete="off"
+                onChange={this.handleChange}
+                value={this.state.search}
+              />
+              <Link to={`/search/${this.state.search}`}>
+                <button type="submit">
+                  <img
+                    src={SearchIcon}
+                    className="header__searchContainer--searchIcon"
+                  />
+                </button>
+              </Link>
+            </form>
+          </div>
+          <nav class="header__nav">
+            <div class="header__nav--item">
+              <span class="header__nav--text">
+                <Link to={"/discover"}>discover</Link>
+              </span>
+            </div>
+            {this.handleUserCheck()}
+          </nav>
+        </div>
+        {/* Default navigation */}
+        <header className={`${this.props.className} default`}>
+          <Link to={"/"}>
+            <img src={LogoIcon} className="header__logoIcon" />
+          </Link>
+          <div className="header__searchContainer">
+            {/* Don't forget to change to ReactForm */}
+            <form>
+              <input
+                type="text"
+                name="searchString"
+                className="header__searchContainer--input"
+                placeholder="Search high-resolution images"
+                autoComplete="off"
+                onChange={this.handleChange}
+                value={this.state.search}
+              />
+              <Link to={`/search/${this.state.search}`}>
+                <button type="submit">
+                  <img
+                    src={SearchIcon}
+                    className="header__searchContainer--searchIcon"
+                  />
+                </button>
+              </Link>
+            </form>
+          </div>
+          <nav class="header__nav">
+            <div class="header__nav--item">
+              <span class="header__nav--text">
+                <Link to={"/discover"}>discover</Link>
+              </span>
+            </div>
+            {this.handleUserCheck()}
+          </nav>
+        </header>
+      </React.Fragment>
     );
   }
 }

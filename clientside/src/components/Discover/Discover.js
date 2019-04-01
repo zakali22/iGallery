@@ -6,14 +6,15 @@ import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
-import * as actions from "../../actions/unsplashActions";
+import { getPhotos } from "../../actions/unsplashActions";
 
 class Discover extends Component {
   state = {
     counter: 2
   };
+
   componentDidMount() {
-    this.props.getPhotos(1);
+    this.props.dispatch(getPhotos(1));
   }
 
   componentDidUpdate() {
@@ -22,7 +23,7 @@ class Discover extends Component {
 
   loadmore = () => {
     let countInc = this.state.counter;
-    this.props.getPhotos(countInc);
+    this.props.dispatch(getPhotos(countInc));
     countInc++;
     this.setState({
       counter: countInc
@@ -30,7 +31,7 @@ class Discover extends Component {
   };
 
   render() {
-    const columns = this.props.unsplash.data;
+    const columns = this.props.unsplash ? this.props.unsplash.data : [];
     console.log(columns);
     return (
       <div className="container">
@@ -79,7 +80,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(Discover);
+export default connect(mapStateToProps)(Discover);

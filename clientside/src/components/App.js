@@ -13,7 +13,6 @@ import EditProfile from "./Profile/Edit";
 // Setting initial State
 import { connect } from "react-redux";
 import { fetchUser } from "../actions/authActions";
-import { getPhotos } from "../actions/unsplashActions";
 
 class App extends Component {
   componentDidMount() {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Header from "../Navigation/Header";
 import { connect } from "react-redux";
-import * as actions from "../../actions/unsplashActions";
+import { getPhoto } from "../../actions/unsplashActions";
 import axios from "axios";
 
 class PhotoDisplay extends Component {
@@ -10,16 +10,21 @@ class PhotoDisplay extends Component {
     image: null
   };
   componentDidMount() {
-    this.props.getPhoto(this.props.match.params.id);
+    this.props.dispatch(getPhoto(this.props.match.params.id));
   }
 
   downloadPhoto = async link => {
-    const id = this.props.match.params.id;
-    const res = await axios.post(`/api/unsplash/getPhoto/${id}`, {
-      link: link
-    });
-    if (res.data.error) {
-      this.props.history.push("/login");
+    if (this.props.auth) {
+      if (!this.props.auth.user.isAuth) {
+        this.props.history.push("/login");
+      } else if (this.props.auth.user.basic_info) {
+        const id = this.props.match.params.id;
+        const res = await axios.post(`/api/unsplash/getPhoto/${id}`, {
+          link: link
+        });
+
+        this.props.history.push("/profile");
+      }
     }
   };
 
@@ -45,7 +50,7 @@ class PhotoDisplay extends Component {
                 onClick={this.downloadPhoto.bind(this, image.downloadLink)}
                 className="photo__container--photoInfo__button"
               >
-                Download
+                Save
               </button>
             </span>
           </div>
@@ -70,7 +75,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(PhotoDisplay);
+export default connect(mapStateToProps)(PhotoDisplay);

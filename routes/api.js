@@ -76,63 +76,41 @@ module.exports = app => {
   });
 
   // DOWNLOAD a photo
-  // app.post("/api/unsplash/getPhoto/:id/", requireLogin, (req, res) => {
-  //   axios({
-  //     method: "GET",
-  //     url: `https://api.unsplash.com/photos/${req.params.id}?client_id=${
-  //       keys.unsplashKey
-  //     }`
-  //   }).then(response => {
-  //     if (req.user.downloadedImages.length === 0) {
-  //       User.updateOne(
-  //         { _id: req.user.id },
-  //         { $push: { downloadedImages: response.data.urls.small } }
-  //       ).then(response => {
-  //         console.log(response);
-  //       });
-  //     } else {
-  //       let linkExists = false;
-  //       req.user.downloadedImages.forEach(link => {
-  //         if (link === response.data.urls.small) {
-  //           linkExists = true;
-  //         }
-  //       });
-  //
-  //       if (!linkExists) {
-  //         User.updateOne(
-  //           { _id: req.user.id },
-  //           { $push: { downloadedImages: response.data.urls.small } }
-  //         ).then(response => {
-  //           console.log(response);
-  //         });
-  //       }
-  //     }
-  //   });
-  //   const download = async () => {
-  //     const homedir = require("os").homedir();
-  //     const url = req.body.link;
-  //     const path = Path.join(homedir, "Downloads", `${req.params.id}.jpg`);
-  //     console.log(homedir);
-  //     const response = await axios({
-  //       method: "GET",
-  //       url: url,
-  //       responseType: "stream"
-  //     });
-  //     response.data.pipe(Fs.createWriteStream(path));
-  //
-  //     return new Promise((resolve, reject) => {
-  //       response.data.on("end", () => {
-  //         resolve();
-  //       });
-  //
-  //       response.data.on("error", () => {
-  //         reject(err);
-  //       });
-  //     });
-  //   };
-  //   download();
-  //   res.send("done");
-  // });
+  app.post("/api/unsplash/getPhoto/:id", (req, res) => {
+    axios({
+      method: "GET",
+      url: `https://api.unsplash.com/photos/${req.params.id}?client_id=${
+        keys.unsplashKey
+      }`
+    }).then(response => {
+      if (req.user.downloadedImages.length === 0) {
+        User.updateOne(
+          { _id: req.user.id },
+          { $push: { downloadedImages: response.data.urls.small } }
+        ).then(response => {
+          console.log(response);
+        });
+      } else {
+        let linkExists = false;
+        req.user.downloadedImages.forEach(link => {
+          if (link === response.data.urls.small) {
+            linkExists = true;
+          }
+        });
+
+        if (!linkExists) {
+          User.updateOne(
+            { _id: req.user.id },
+            { $push: { downloadedImages: response.data.urls.small } }
+          ).then(response => {
+            console.log(response);
+          });
+        }
+      }
+    });
+
+    res.send("done");
+  });
 
   // SEARCH a photo
   app.post("/api/unsplash/searchPhoto/:page", (req, res) => {

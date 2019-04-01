@@ -5,6 +5,11 @@ export default function(state = null, action) {
         user: action.payload
       };
       break;
+    case "EDIT_USER":
+      return {
+        user: action.payload
+      };
+      break;
     default:
       return state;
   }

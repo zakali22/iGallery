@@ -14,12 +14,12 @@ class Profile extends Component {
           <div className="profile__container">
             <img
               className="profile__container--image"
-              src={this.props.auth.user.image}
+              src={this.props.auth.user.basic_info.image}
             />
             <div className="profile__container--details">
               <div className="profile__container--details-info">
-                <h1>{this.props.auth.user.name}</h1>
-                <Link to={`/edit/${this.props.auth.user._id}`}>
+                <h1>{this.props.auth.user.basic_info.name}</h1>
+                <Link to={`/edit/${this.props.auth.user.basic_info._id}`}>
                   <button>Edit profile</button>
                 </Link>
               </div>
@@ -28,16 +28,23 @@ class Profile extends Component {
           <div className="profile__container-downloads">
             <div className="download--container">
               <div className="download--count">
-                <p>{this.props.auth.user.downloadedImages.length} Downloads</p>
+                <p>
+                  {this.props.auth.user.basic_info.downloadedImages.length}{" "}
+                  Downloads
+                </p>
               </div>
               <div className="download--images">
-                {this.props.auth.user.downloadedImages.map(image => {
-                  return (
-                    <div className="download--images__container">
-                      <img src={image} />
-                    </div>
-                  );
-                })}
+                {this.props.auth.user
+                  ? this.props.auth.user.basic_info.downloadedImages.map(
+                      image => {
+                        return (
+                          <div className="download--images__container">
+                            <img src={image} />
+                          </div>
+                        );
+                      }
+                    )
+                  : null}
               </div>
             </div>
           </div>

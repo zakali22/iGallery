@@ -12,9 +12,14 @@ import Profile from "./Profile/Profile";
 import EditProfile from "./Profile/Edit";
 // Setting initial State
 import { connect } from "react-redux";
-import * as actions from "../actions/unsplashActions";
+import { fetchUser } from "../actions/authActions";
+import { getPhotos } from "../actions/unsplashActions";
 
 class App extends Component {
+  componentDidMount() {
+    console.log(this.props);
+    this.props.dispatch(fetchUser());
+  }
   render() {
     return (
       <Router>
@@ -40,7 +45,4 @@ const mapStateToProps = state => {
     unsplash: state.unsplash
   };
 };
-export default connect(
-  mapStateToProps,
-  actions
-)(App);
+export default connect(mapStateToProps)(App);

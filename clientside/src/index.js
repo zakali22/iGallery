@@ -6,14 +6,15 @@ import App from "./components/App";
 import { createStore, applyMiddleware, compose } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import thunk from "redux-thunk";
+import reduxThunk from "redux-thunk";
+import promiseMiddleware from "redux-promise";
 import rootReducer from "./reducers";
 
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
 const initialState = {};
-const middleware = [thunk];
+const middlewares = [reduxThunk, promiseMiddleware];
 
 const persistConfig = {
   key: "root",
@@ -26,7 +27,7 @@ let store = createStore(
   persistedReducer,
   initialState,
   compose(
-    applyMiddleware(...middleware),
+    applyMiddleware(...middlewares),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );

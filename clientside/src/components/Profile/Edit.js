@@ -4,8 +4,8 @@ import Header from "../Navigation/Header";
 import { Form, Text, Scope } from "informed";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
-
 import { connect } from "react-redux";
+import { editUser } from "../../actions/authActions";
 
 class Edit extends Component {
   state = {
@@ -26,13 +26,16 @@ class Edit extends Component {
   };
 
   handleSubmit = async () => {
-    const res = await axios.post(`/api/edit/${this.props.auth.user._id}`, {
+    const newData = {
       first_name: this.state.first_name,
       last_name: this.state.last_name,
-      email: this.state.email,
       name: `${this.state.first_name} ${this.state.last_name}`
-    });
-    this.props.history.push("/profile");
+    };
+    this.props
+      .dispatch(editUser(newData, this.props.auth.user.basic_info._id))
+      .then(response => {
+        this.props.history.push("/profile");
+      });
   };
 
   render() {
@@ -63,16 +66,7 @@ class Edit extends Component {
                 validate={this.basicValidation}
                 onChange={this.handleChange}
               />
-              <Text
-                field="email"
-                name="email"
-                id="validate-email"
-                placeholder="Email"
-                validateOnChange
-                validateOnBlur
-                validate={this.passwordLengthValidation}
-                onChange={this.handleChange}
-              />
+
               <button type="submit" onClick={this.handleSubmit}>
                 Submit
               </button>
@@ -90,7 +84,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(Edit);
+export default connect(mapStateToProps)(Edit);

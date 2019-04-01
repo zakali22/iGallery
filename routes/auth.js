@@ -21,7 +21,7 @@ module.exports = app => {
     passport.authenticate("google"),
     (req, res) => {
       console.log(req.user);
-      res.redirect("http://localhost:3000/");
+      res.redirect("https://igallery-prod.herokuapp.com/");
     }
   );
 
@@ -37,7 +37,7 @@ module.exports = app => {
     "/auth/facebook/callback",
     passport.authenticate("facebook"),
     (req, res) => {
-      res.redirect("/");
+      res.redirect("https://igallery-prod.herokuapp.com/");
     }
   );
   const registerUser = (newUser, callback) => {

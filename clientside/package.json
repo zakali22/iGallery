@@ -4,10 +4,10 @@
   "private": true,
   "proxy": {
     "/auth/*": {
-      "target": "http://localhost:5000/"
+      "target": "https://igallery-prod.herokuapp.com/"
     },
     "/api/*": {
-      "target": "http://localhost:5000/"
+      "target": "https://igallery-prod.herokuapp.com/"
     }
   },
   "dependencies": {

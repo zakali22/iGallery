@@ -81,15 +81,12 @@ class Login extends Component {
           </Form>
           <h5>or</h5>
           <div className="third-party">
-            <a href="http://localhost:5000/auth/google" className="button-link">
+            <a href="/auth/google" className="button-link">
               <button className="button-link--google">
                 <img src={GoogleIcon} /> <p>Sign in with Google</p>
               </button>
             </a>
-            <a
-              href="http://localhost:5000/auth/facebook"
-              className="button-link"
-            >
+            <a href="/auth/facebook" className="button-link">
               <button className="button-link--facebook">
                 <img src={FacebookIcon} /> <p>Sign in with Facebook</p>
               </button>

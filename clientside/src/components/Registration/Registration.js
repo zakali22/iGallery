@@ -93,49 +93,49 @@ class Register extends Component {
               </ul>
             </div>
           ) : null}
-          {/*           <Form id="validate-form" method="post" action="#">
-                      <div className="side-by-side">
-                        <Text
-                          field="first_name"
-                          id="validate-first"
-                          name="first_name"
-                          placeholder="First name"
-                          validateOnChange
-                          validate={this.basicValidation}
-                          onChange={this.handleChange}
-                        />
-                        <Text
-                          field="last_name"
-                          id="validate-last"
-                          name="last_name"
-                          placeholder="Last name"
-                          validateOnChange
-                          validate={this.basicValidation}
-                          onChange={this.handleChange}
-                        />
-                      </div>
-                      <Text
-                        field="email"
-                        name="email"
-                        id="validate-email"
-                        placeholder="Email"
-                        validateOnChange
-                        validate={this.basicValidation}
-                        onChange={this.handleChange}
-                      />
-                      <Text
-                        field="password"
-                        name="password"
-                        id="validate-password"
-                        placeholder="Password"
-                        type="password"
-                        onChange={this.handleChange}
-                      />
-                      <button type="submit" onClick={this.handleSubmit}>
-                        Submit
-                      </button>
-                    </Form>
-                    <h5>or</h5>*/}
+          <Form id="validate-form" method="post" action="#">
+            <div className="side-by-side">
+              <Text
+                field="first_name"
+                id="validate-first"
+                name="first_name"
+                placeholder="First name"
+                validateOnChange
+                validate={this.basicValidation}
+                onChange={this.handleChange}
+              />
+              <Text
+                field="last_name"
+                id="validate-last"
+                name="last_name"
+                placeholder="Last name"
+                validateOnChange
+                validate={this.basicValidation}
+                onChange={this.handleChange}
+              />
+            </div>
+            <Text
+              field="email"
+              name="email"
+              id="validate-email"
+              placeholder="Email"
+              validateOnChange
+              validate={this.basicValidation}
+              onChange={this.handleChange}
+            />
+            <Text
+              field="password"
+              name="password"
+              id="validate-password"
+              placeholder="Password"
+              type="password"
+              onChange={this.handleChange}
+            />
+            <button type="submit" onClick={this.handleSubmit}>
+              Submit
+            </button>
+          </Form>
+          <h5>or</h5>
           <div className="third-party">
             <a href="/auth/google" className="button-link">
               <button className="button-link--google">

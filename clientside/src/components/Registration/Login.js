@@ -59,7 +59,7 @@ class Login extends Component {
               </ul>
             </div>
           ) : null}
-          <Form id="validate-form">
+          {/* <Form id="validate-form">
             <Text
               field="username"
               name="username"
@@ -79,7 +79,7 @@ class Login extends Component {
               Submit
             </button>
           </Form>
-          <h5>or</h5>
+          <h5>or</h5> */}
           <div className="third-party">
             <a href="/auth/google" className="button-link">
               <button className="button-link--google">

@@ -66,7 +66,6 @@ module.exports = app => {
     req
       .checkBody("password", "Password must contain a number")
       .matches("[0-9]");
-    req.checkBody("postcode", "Postcode is required").notEmpty();
     req
       .checkBody("postcode", "Postcode must contain a number")
       .matches("[0-9]");

@@ -52,7 +52,7 @@ class Register extends Component {
     this.setState({
       errors: []
     });
-    const res = await axios.post("/api/register", {
+    const res = await axios.post("/auth/register", {
       first_name: this.state.first_name,
       last_name: this.state.last_name,
       email: this.state.email,

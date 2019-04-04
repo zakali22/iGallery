@@ -26,7 +26,7 @@ class Login extends Component {
     this.setState({
       errors: []
     });
-    const res = await axios.post("/api/signin", {
+    const res = await axios.post("/auth/signin", {
       username: this.state.username,
       password: this.state.password
     });

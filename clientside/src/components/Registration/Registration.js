@@ -52,14 +52,17 @@ class Register extends Component {
     this.setState({
       errors: []
     });
-    const res = await axios.post("/api/add", {
-      first_name: this.state.first_name,
-      last_name: this.state.last_name,
-      username: this.state.username,
-      email: this.state.email,
-      password: this.state.password,
-      confirm_password: this.state.confirm_password
-    });
+    const res = await axios.post(
+      "https://igallery-prod.herokuapp.com/api/add",
+      {
+        first_name: this.state.first_name,
+        last_name: this.state.last_name,
+        username: this.state.username,
+        email: this.state.email,
+        password: this.state.password,
+        confirm_password: this.state.confirm_password
+      }
+    );
     if (res.data.error) {
       const errorsArray = this.state.errors;
       res.data.error.map(error => {

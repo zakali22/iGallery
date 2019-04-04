@@ -67,9 +67,6 @@ module.exports = app => {
       .checkBody("password", "Password must contain a number")
       .matches("[0-9]");
     req
-      .checkBody("postcode", "Postcode must contain a number")
-      .matches("[0-9]");
-    req
       .checkBody("password", "Password must be at least 5 characters")
       .isLength({ min: 5 });
 

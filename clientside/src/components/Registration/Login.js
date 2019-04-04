@@ -26,13 +26,10 @@ class Login extends Component {
     this.setState({
       errors: []
     });
-    const res = await axios.post(
-      "https://igallery-prod.herokuapp.com/api/logUser",
-      {
-        username: this.state.username,
-        password: this.state.password
-      }
-    );
+    const res = await axios.post("/api/signin", {
+      username: this.state.username,
+      password: this.state.password
+    });
     if (res.data.success) {
       this.props.history.push("/");
     }

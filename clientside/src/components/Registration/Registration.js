@@ -52,17 +52,12 @@ class Register extends Component {
     this.setState({
       errors: []
     });
-    const res = await axios.post(
-      "https://igallery-prod.herokuapp.com/api/add",
-      {
-        first_name: this.state.first_name,
-        last_name: this.state.last_name,
-        username: this.state.username,
-        email: this.state.email,
-        password: this.state.password,
-        confirm_password: this.state.confirm_password
-      }
-    );
+    const res = await axios.post("/api/register", {
+      first_name: this.state.first_name,
+      last_name: this.state.last_name,
+      email: this.state.email,
+      password: this.state.password
+    });
     if (res.data.error) {
       const errorsArray = this.state.errors;
       res.data.error.map(error => {
@@ -120,15 +115,6 @@ class Register extends Component {
               />
             </div>
             <Text
-              field="username"
-              name="username"
-              id="validate-username"
-              placeholder="Username"
-              validateOnChange
-              validate={this.basicValidation}
-              onChange={this.handleChange}
-            />
-            <Text
               field="email"
               name="email"
               id="validate-email"
@@ -142,14 +128,6 @@ class Register extends Component {
               name="password"
               id="validate-password"
               placeholder="Password"
-              type="password"
-              onChange={this.handleChange}
-            />
-            <Text
-              field="confirm_password"
-              id="validate-confirm"
-              name="confirm_password"
-              placeholder="Confirm password"
               type="password"
               onChange={this.handleChange}
             />
